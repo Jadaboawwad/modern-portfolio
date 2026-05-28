@@ -5,8 +5,6 @@ import Circles from "../../components/Circles";
 import ServiceSlider from "../../components/ServiceSlider";
 import { fadeIn } from "../../variants";
 
-export const serviceData = [];
-
 const Services = () => {
   return (
     <div className="h-full bg-primary/30 py-36 flex items-center">
@@ -31,8 +29,8 @@ const Services = () => {
               exit="hidden"
               className="mb-4 max-w-[400px] mx-auto lg:mx-0"
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-              tempora eligendi, quisquam tempore sint reiciendis.
+              I build production-ready systems across web, mobile, and AI — from
+              architecture and implementation to deployment and quality.
             </motion.p>
           </div>
 

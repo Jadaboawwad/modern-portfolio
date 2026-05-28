@@ -2,32 +2,32 @@ import { motion } from "framer-motion";
 import { BsArrowRight } from "react-icons/bs";
 
 import { fadeIn } from "../../variants";
-import { useState } from "react";
 
 const Contact = () => {
-  const [isLoading, setIsLoading] = useState(false);
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIsLoading(true);
 
-    const myForm = event.target;
-    const formData = new FormData(myForm);
+    const formData = new FormData(event.currentTarget);
 
-    fetch("/__forms.html", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData).toString(),
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          alert("Thank you. I will get back to you ASAP.");
-        } else {
-          console.log(res);
-        }
-      })
-      .catch((error) => console.log(error))
-      .finally(() => setIsLoading(false));
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const subject = String(formData.get("subject") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+
+    const fullSubject = subject || "Portfolio contact";
+    const body = [
+      message,
+      "",
+      `From: ${name}${email ? ` <${email}>` : ""}`,
+      "Sent via jehadabuawwad.com portfolio",
+    ].join("\n");
+
+    const mailto = `mailto:jehadabuawwad@outlook.com?subject=${encodeURIComponent(
+      fullSubject
+    )}&body=${encodeURIComponent(body)}`;
+
+    // Navigate in the same user-gesture turn so the OS default mail client opens.
+    window.location.assign(mailto);
   };
 
   return (
@@ -43,7 +43,7 @@ const Contact = () => {
             exit="hidden"
             className="h2 text-center mb-12"
           >
-            Let's <span className="text-accent">connect.</span>
+            Let&apos;s <span className="text-accent">connect.</span>
           </motion.h2>
 
           {/* form */}
@@ -60,15 +60,11 @@ const Contact = () => {
           >
             {/* input group */}
             <div className="flex gap-x-6 w-full">
-              <input type="hidden" name="form-name" value="contact" />
-
               <input
                 type="text"
                 name="name"
                 placeholder="Name"
                 className="input"
-                disabled={isLoading}
-                aria-disabled={isLoading}
                 required
                 aria-required
               />
@@ -77,8 +73,6 @@ const Contact = () => {
                 name="email"
                 placeholder="E-mail"
                 className="input"
-                disabled={isLoading}
-                aria-disabled={isLoading}
                 required
                 aria-required
               />
@@ -88,8 +82,6 @@ const Contact = () => {
               name="subject"
               placeholder="Subject"
               className="input"
-              disabled={isLoading}
-              aria-disabled={isLoading}
               required
               aria-required
             />
@@ -97,19 +89,15 @@ const Contact = () => {
               name="message"
               placeholder="Message..."
               className="textarea"
-              disabled={isLoading}
-              aria-disabled={isLoading}
               required
               aria-required
             />
             <button
               type="submit"
               className="btn rounded-full border border-white/50 max-w-[170px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group"
-              disabled={isLoading}
-              aria-disabled={isLoading}
             >
               <span className="group-hover:-translate-y-[120%] group-hover:opacity-0 transition-all duration-500">
-                Let's talk
+                Let&apos;s talk
               </span>
 
               <BsArrowRight

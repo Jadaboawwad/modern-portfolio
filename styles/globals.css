@@ -1,9 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap");
+
+:root {
+  --font-sora: "Sora";
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .translate-z-0 {
   transform: translateZ(0px);
+}
+
+/* Scrollable containers without visible scrollbar (keeps scroll behavior). */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE/Edge legacy */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
 .swiper-pagination-horizontal.swiper-pagination-bullets

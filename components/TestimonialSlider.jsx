@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { FaQuoteLeft } from "react-icons/fa";
-import { Navigation, Pagination } from "swiper";
+import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -10,24 +10,26 @@ import "swiper/css/pagination";
 const testimonialData = [
   {
     image: "/t-avt-1.png",
-    name: "Anne Smith",
-    position: "Customer",
+    name: "Hasan Armoush",
+    position:
+      "Lead Mobile Engineer | Swift & Flutter Engineer (Managed Jehad directly) · Oct 29, 2023",
     message:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum expedita odit beatae, cupiditate saepe quam officia aut placeat quas neque!",
+      "Jehad is a very competitive, smart, resourceful developer and the amount of effort he's capable to put in day by day is just astonishing.",
   },
   {
     image: "/t-avt-2.png",
-    name: "Jane Doe",
-    position: "Customer",
+    name: "Omar Al-Nasier",
+    position:
+      "Lead Artificial Intelligence Engineer (Managed Jehad directly) · Dec 26, 2021",
     message:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum expedita odit beatae, cupiditate saepe quam officia aut placeat quas neque!",
+      "Jehad is a fast-learner, a systematic person, and a so kind one. I managed Jehad for building machine learning projects for about 7 months. Regarding the model tuning, Jehad was the best in my Class. I highly recommend Jehad for all machine learning positions.",
   },
   {
     image: "/t-avt-3.png",
-    name: "Jhon Doe",
-    position: "Customer",
+    name: "Faisal Kushha",
+    position: "MPA | Data Analyst (Studied together) · Dec 26, 2021",
     message:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum expedita odit beatae, cupiditate saepe quam officia aut placeat quas neque!",
+      "I worked with Jehad on two projects, he is a cooperative and reliable person. Additionally he showed a great skills in Machine Learning.",
   },
 ];
 
@@ -73,7 +75,7 @@ const TestimonialSlider = () => {
               <div className="mb-4">
                 <FaQuoteLeft
                   className="text-4xl xl:text-6xl text-white/20 mx-auto md:mx-0"
-                  aria-aria-hidden
+                  aria-hidden
                 />
               </div>
 
