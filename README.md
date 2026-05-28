@@ -1,186 +1,229 @@
-<a name="readme-top"></a>
 
-# Modern Portfolio using Next.js and Framer Motion
 
-![Modern Portfolio using Next.js and Framer Motion](/.github/images/img_main.png "Modern Portfolio using Next.js and Framer Motion")
+<br><br><br><br>
+<!-- 
+# About Argon Template
+# [Argon Design System React](https://demos.creative-tim.com/argon-design-system-react?ref=adsr-github-readme) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/home?status=Argon%20Design%20System%20is%20a%20Free%20Bootstrap%204,%20React%20and%20Reactstrap%20Dashboard%20made%20using%20create-react-app%20%E2%9D%A4%EF%B8%8F%0Ahttps%3A//demos.creative-tim.com/argon-design-system-react%20%23react%20%23reactstrap%20%23createreactapp%20%23argon%20%23argondesign%20%23reactkit%20%23argonreact%20%23reactdesign%20%23bootstrap%20%23design%20%23uikit%20%23freebie%20%20via%20%40CreativeTim)
 
-[![Ask Me Anything!](https://flat.badgen.net/static/Ask%20me/anything?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy "Ask Me Anything!")
-[![GitHub license](https://flat.badgen.net/github/license/sanidhyy/modern-portfolio?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/modern-portfolio/blob/main/LICENSE "GitHub license")
-[![Maintenance](https://flat.badgen.net/static/Maintained/yes?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/modern-portfolio/commits/main "Maintenance")
-[![GitHub branches](https://flat.badgen.net/github/branches/sanidhyy/modern-portfolio?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/modern-portfolio/branches "GitHub branches")
-[![Github commits](https://flat.badgen.net/github/commits/sanidhyy/modern-portfolio?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/modern-portfolio/commits "Github commits")
-[![Netlify Status](https://api.netlify.com/api/v1/badges/721491f5-0b0d-4120-96bd-6bd0480ef1e5/deploy-status)](https://awersome-portfolio.netlify.app/ "Netlify Status")
-[![GitHub issues](https://flat.badgen.net/github/issues/sanidhyy/modern-portfolio?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/modern-portfolio/issues "GitHub issues")
-[![GitHub pull requests](https://flat.badgen.net/github/prs/sanidhyy/modern-portfolio?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/modern-portfolio/pulls "GitHub pull requests")
 
-<!-- Table of Contents -->
-<details>
+ ![version](https://img.shields.io/badge/version-1.1.0-blue.svg)  ![license](https://img.shields.io/badge/license-MIT-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/argon-design-system-react.svg?maxAge=2592000)](https://github.com/creativetimofficial/argon-design-system-react/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/argon-design-system-react.svg?maxAge=2592000)](https://github.com/creativetimofficial/argon-design-system-react/issues?q=is%3Aissue+is%3Aclosed) [![Join the chat at https://gitter.im/NIT-dgp/General](https://badges.gitter.im/NIT-dgp/General.svg)](https://gitter.im/creative-tim-general/Lobby) [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/E4aHAQy)
 
-<summary>
 
-# :notebook_with_decorative_cover: Table of Contents
+![Product Gif](https://raw.githubusercontent.com/creativetimofficial/public-assets/main/argon-design-system-react/argon-design-system-react.gif)
 
-</summary>
+Start your development with a Design System for [Bootstrap 4](https://getbootstrap.com/?ref=creativetim), [React](https://reactjs.org/?ref=creativetim) and [Reactstrap](https://reactstrap.github.io/?ref=creativetim). It is open source, free and it features many components that can help you create amazing websites.
 
-- [Folder Structure](#bangbang-folder-structure)
-- [Getting Started](#toolbox-getting-started)
-- [Screenshots](#camera-screenshots)
-- [Tech Stack](#gear-tech-stack)
-- [Stats](#wrench-stats)
-- [Contribute](#raised_hands-contribute)
-- [Acknowledgements](#gem-acknowledgements)
-- [Buy Me a Coffee](#coffee-buy-me-a-coffee)
-- [Follow Me](#rocket-follow-me)
-- [Learn More](#books-learn-more)
-- [Deploy on Vercel](#page_with_curl-deploy-on-vercel)
-- [Give A Star](#star-give-a-star)
-- [Star History](#star2-star-history)
-- [Give A Star](#star-give-a-star)
+**Fully Coded Components**
 
-</details>
+Argon Design System React is built with over 100 individual components, giving you the freedom of choosing and combining. All components can take variations in color, that you can easily modify using SASS files.
 
-## :bangbang: Folder Structure
+You will save a lot of time going from prototyping to full-functional code, because all elements are implemented. This Design System is coming with prebuilt examples, so the development process is seamless, switching from our pages to the real website is very easy to be done.
 
-Here is the folder structure of this app.
+Every element has multiple states for colors, styles, hover, focus, that you can easily access and use.
 
-<!--- FOLDER_STRUCTURE_START --->
-```bash
-modern-portfolio/
-  |- components/
-    |-- Avatar.jsx
-    |-- Bulb.jsx
-    |-- CardLeft.jsx
-    |-- CardRight.jsx
-    |-- Circles.jsx
-    |-- Header.jsx
-    |-- Layout.jsx
-    |-- Nav.jsx
-    |-- ParticlesContainer.jsx
-    |-- ProjectsBtn.jsx
-    |-- ServiceSlider.jsx
-    |-- Socials.jsx
-    |-- TestimonialSlider.jsx
-    |-- TopLeftImg.jsx
-    |-- Transition.jsx
-    |-- WorkSlider.jsx
-  |- pages/
-    |-- about/
-    |-- contact/
-    |-- services/
-    |-- testimonials/
-    |-- work/
-    |-- _app.jsx
-    |-- index.jsx
-  |- public/
-  |- styles/
-    |-- globals.css
-  |- .eslintrc.json
-  |- .gitignore
-  |- netlify.toml
-  |- next.config.js
-  |- package-lock.json
-  |- package.json
-  |- postcss.config.js
-  |- tailwind.config.js
-  |- variants.js
+View [all components here](https://demos.creative-tim.com/argon-design-system-react/#/?ref=adsr-github-readme).
+
+**Complex Documentation**
+
+Each element is well presented in a very complex documentation. You can read more about the [idea behind this design system here](https://demos.creative-tim.com/argon-design-system-react/#/documentation/overview?ref=adsr-github-readme). You can [check the components here](https://demos.creative-tim.com/argon-design-system-react/#/documentation/alert?ref=adsr-github-readme) and [the foundation here](https://demos.creative-tim.com/argon-design-system-react/#/documentation/colors?ref=adsr-github-readme).
+
+**Example Pages**
+
+If you want to get inspiration or just show something directly to your clients, you can jump start your development with our pre-built example pages. You will be able to quickly set up the basic structure for your web project.
+
+View [example pages here](https://demos.creative-tim.com/argon-design-system-react/#/landing-page?ref=adsr-github-readme).
+
+
+## Table of Contents
+
+* [Versions](#versions)
+* [Demo](#demo)
+* [Quick Start](#quick-start)
+* [Documentation](#documentation)
+* [File Structure](#file-structure)
+* [Browser Support](#browser-support)
+* [Resources](#resources)
+* [Reporting Issues](#reporting-issues)
+* [Licensing](#licensing)
+* [Useful Links](#useful-links)
+
+
+## Versions
+
+[<img src="https://github.com/creativetimofficial/public-assets/blob/main/logos/html-logo.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/argon-design-system)[<img src="https://github.com/creativetimofficial/public-assets/blob/main/logos/angular-logo.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/argon-design-system-angular)[<img src="https://github.com/creativetimofficial/public-assets/blob/main/logos/vue-logo.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/vue-argon-design-system)[<img src="https://github.com/creativetimofficial/public-assets/blob/main/logos/react-logo.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/argon-design-system-react)[<img src="https://github.com/creativetimofficial/public-assets/blob/main/logos/sketch-logo.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/argon-design-system-react)[<img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/main/logos/photoshop-logo.jpg" width="60" height="60" />](https://www.creative-tim.com/product/argon-design-system-react)
+
+
+
+| HTML | Angular | Vue  | React  |
+| --- | --- | ---  |---  |
+| [![Argon Design System HTML](https://github.com/creativetimofficial/public-assets/blob/main/argon-design-system/argon-design-system.jpg?raw=true)](https://www.creative-tim.com/product/argon-design-system?ref=adsr-github-readme)  | [![Argon Design System Angular](https://github.com/creativetimofficial/public-assets/blob/main/argon-design-system-angular/argon-design-system-angular.jpg?raw=true)](https://www.creative-tim.com/product/argon-design-system-angular?ref=adsr-github-readme)  | [![Vue Argon Design System](https://github.com/creativetimofficial/public-assets/blob/main/vue-argon-design-system/vue-argon-design-system.jpg?raw=true)](https://www.creative-tim.com/product/vue-argon-design-system?ref=adsr-github-readme)  | [![Argon Design System React](https://github.com/creativetimofficial/public-assets/blob/main/argon-design-system-react/argon-design-system-react.jpg?raw=true)](https://www.creative-tim.com/product/argon-design-system-react?ref=adsr-github-readme)
+
+
+## Demo
+
+| Buttons | Inputs | Navbars  |
+| --- | --- | ---  |
+| [![Buttons](https://github.com/creativetimofficial/public-assets/blob/main/argon-design-system-react/buttons.png?raw=true)](https://demos.creative-tim.com/argon-design-system-react/#/)  | [![Inputs](https://github.com/creativetimofficial/public-assets/blob/main/argon-design-system-react/inputs.png?raw=true)](https://demos.creative-tim.com/argon-design-system-react/#/)  | [![Navbar](https://github.com/creativetimofficial/public-assets/blob/main/argon-design-system-react/navbars.png?raw=true)](https://demos.creative-tim.com/argon-design-system-react/#/)  
+
+| Login Page | Landing Page | Profile Page  | Register Page  |
+| --- | --- | ---  | ---  |
+| [![Login Page](https://raw.githubusercontent.com/creativetimofficial/public-assets/main/argon-design-system-react/login.png)](https://demos.creative-tim.com/argon-design-system-react/#/login-page)  | [![Landing Page](https://github.com/creativetimofficial/public-assets/blob/main/argon-design-system-react/landing.png?raw=true)](https://demos.creative-tim.com/argon-design-system-react/#/landing-page)  | [![Profile Page](https://github.com/creativetimofficial/public-assets/blob/main/argon-design-system-react/profile.png?raw=true)](https://demos.creative-tim.com/argon-design-system-react/#/profile-page)  | [![Register Page](https://github.com/creativetimofficial/public-assets/blob/main/argon-design-system-react/register.png?raw=true)](https://demos.creative-tim.com/argon-design-system-react/#/register-page)  
+
+
+[View More](https://demos.creative-tim.com/argon-design-system-react?ref=adsr-github-readme)
+
+
+## Quick start
+
+- Clone this template repo. 
+
+
+## Documentation
+The documentation for the Argon Design System React is hosted at our [website](https://demos.creative-tim.com/argon-design-system-react/#/documentation/overview).
+
+
+## File Structure
+Within the download you'll find the following directories and files:
+
 ```
-<!--- FOLDER_STRUCTURE_END --->
+Argon Design System React
+.
+├── CHANGELOG.md
+├── ISSUE_TEMPLATE.md
+├── LICENSE
+├── README.md
+├── jsconfig.json
+├── package.json
+├── Documentation
+│   └── documentation.html
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   └── manifest.json
+└── src
+    ├── assets
+    │   ├── css
+    │   │   ├── argon-design-system-react.css
+    │   │   ├── argon-design-system-react.css.map
+    │   │   └── argon-design-system-react.min.css
+    │   ├── img
+    │   │   ├── brand
+    │   │   ├── icons
+    │   │   │   └── common
+    │   │   ├── ill
+    │   │   └── theme
+    │   ├── scss
+    │   │   ├── argon-design-system-react.scss
+    │   │   ├── bootstrap
+    │   │   │   ├── mixins
+    │   │   │   └── utilities
+    │   │   ├── custom
+    │   │   │   ├── mixins
+    │   │   │   ├── utilities
+    │   │   │   └── vendor
+    │   │   └── react
+    │   │       ├── custom
+    │   │       │   └── vendor
+    │   │       └── react-differences.scss
+    │   └── vendor
+    │       ├── font-awesome
+    │       │   ├── css
+    │       │   └── fonts
+    │       └── nucleo
+    │           ├── css
+    │           └── fonts
+    ├── components
+    │   ├── Footers
+    │   │   ├── CardsFooter.js
+    │   │   └── SimpleFooter.js
+    │   └── Navbars
+    │       └── DemoNavbar.js
+    ├── index.js
+    └── views
+        ├── Index.js
+        ├── IndexSections
+        │   ├── Alerts.js
+        │   ├── Buttons.js
+        │   ├── Carousel.js
+        │   ├── CustomControls.js
+        │   ├── Datepicker.js
+        │   ├── Download.js
+        │   ├── Hero.js
+        │   ├── Icons.js
+        │   ├── Inputs.js
+        │   ├── Labels.js
+        │   ├── Login.js
+        │   ├── Menus.js
+        │   ├── Modals.js
+        │   ├── Navbars.js
+        │   ├── Pagination.js
+        │   ├── Pills.js
+        │   ├── Progress.js
+        │   ├── Tabs.js
+        │   ├── TooltipPopover.js
+        │   └── Typography.js
+        └── examples
+            ├── Landing.js
+            ├── Login.js
+            ├── Profile.js
+            └── Register.js
+```
 
-<br />
 
-## :toolbox: Getting Started
+## Browser Support
 
-1. Make sure **Git** and **NodeJS** is installed.
+At present, we officially aim to support the last two versions of the following browsers:
 
-2. Clone this repository to your local computer.
+<img src="https://github.com/creativetimofficial/public-assets/blob/main/logos/chrome-logo.png?raw=true" width="64" height="64"> <img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/main/logos/firefox-logo.png" width="64" height="64"> <img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/main/logos/edge-logo.png" width="64" height="64"> <img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/main/logos/safari-logo.png" width="64" height="64"> <img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/main/logos/opera-logo.png" width="64" height="64">
 
-3. Open terminal in root directory. Run `npm install --legacy-peer-deps` or `yarn install --legacy-peer-deps`.
 
-4. Now app is fully configured 👍 and you can start using this app using `npm run dev` or `yarn dev`.
 
-## :camera: Screenshots:
+## Resources
+- Demo: <https://demos.creative-tim.com/argon-design-system-react/#/?ref=adsr-github-readme>
+- Download Page: <https://www.creative-tim.com/product/argon-design-system-react?ref=adsr-github-readme>
+- Documentation: <https://demos.creative-tim.com/argon-design-system-react/#/documentation/overview?ref=adsr-github-readme>
+- License Agreement: <https://www.creative-tim.com/license?ref=adsr-github-readme>
+- Support: <https://www.creative-tim.com/contact-us?ref=adsr-github-readme>
+- Issues: [Github Issues Page](https://github.com/creativetimofficial/argon-design-system-react/issues?ref=creativetim)
+- **Dashboard:**
 
-![Modern UI/UX](/.github/images/img1.png "Modern UI/UX")
+| HTML | Angular | Vue | React | Laravel | NodeJS |
+| --- | --- | --- | --- | --- | --- |
+| [![Argon Dashboard  HTML](https://github.com/creativetimofficial/public-assets/blob/main/argon-dashboard/argon-dashboard.jpg?raw=true)](https://www.creative-tim.com/product/argon-dashboard?ref=adsr-github-readme) | [![Argon Dashboard Angular](https://github.com/creativetimofficial/public-assets/blob/main/argon-dashboard-angular/argon-dashboard-angular.jpg?raw=true)](https://www.creative-tim.com/product/argon-dashboard-angular?ref=adsr-github-readme) | [![Vue Argon Dashboard](https://github.com/creativetimofficial/public-assets/blob/main/vue-argon-dashboard/vue-argon-dashboard.jpg?raw=true)](https://www.creative-tim.com/product/vue-argon-dashboard) | [![Argon Dashboard React](https://github.com/creativetimofficial/public-assets/blob/main/argon-dashboard-react/argon-dashboard-react.jpg?raw=true)](https://www.creative-tim.com/product/argon-dashboard-react?ref=adsr-github-readme) | [![Argon Dashboard Laravel](https://github.com/creativetimofficial/public-assets/blob/main/argon-dashboard-laravel/argon-dashboard-laravel.jpg?raw=true)](https://www.creative-tim.com/product/argon-dashboard-laravel?ref=adsr-github-readme) | [![Argon Dashboard NodeJS](https://raw.githubusercontent.com/creativetimofficial/public-assets/main/argon-dashboard-nodejs/argon-dashboard-nodejs.jpg)](https://www.creative-tim.com/product/argon-dashboard-nodejs?ref=adsr-github-readme) |
 
-![Services](/.github/images/img2.png "Services")
+## Reporting Issues
 
-![Showcase Projects](/.github/images/img3.png "Showcase Projects")
+We use GitHub Issues as the official bug tracker for the Argon Design System React. Here are some advices for our users that want to report an issue:
 
-![Contact Form](/.github/images/img4.png "Contact Form")
+1. Make sure that you are using the latest version of the Argon Design System React. Check the CHANGELOG from your dashboard on our [website](https://www.creative-tim.com/?ref=adsr-github-readme).
+2. Providing us reproducible steps for the issue will shorten the time it takes for it to be fixed.
+3. Some issues may be browser specific, so specifying in what browser you encountered the issue might help.
 
-## :gear: Tech Stack
+## Licensing
 
-[![React JS](https://skillicons.dev/icons?i=react "React JS")](https://react.dev/ "React JS") [![Next JS](https://skillicons.dev/icons?i=next "Next JS")](https://nextjs.org/ "Next JS") [![JavaScript](https://skillicons.dev/icons?i=js "JavaScript")](https://developer.mozilla.org/en-US/docs/Web/JavaScript "JavaScript") [![Tailwind CSS](https://skillicons.dev/icons?i=tailwind "Tailwind CSS")](https://tailwindcss.com/ "Tailwind CSS") [![Netlify](https://skillicons.dev/icons?i=netlify "Netlify")](https://netlify.app/ "Netlify")
+- Copyright 2020 Creative Tim (https://www.creative-tim.com/?ref=adsr-github-readme)
 
-## :wrench: Stats
+- Licensed under MIT (https://github.com/creativetimofficial/argon-design-system-react/blob/main/LICENSE.md?ref=creativetim)
 
-[![Stats for Modern Portfolio](/.github/images/stats.svg "Stats for Modern Portfolio")](https://pagespeed.web.dev/analysis?url=https://awersome-portfolio.netlify.app/ "Stats for Modern Portfolio")
+## Useful Links
 
-## :raised_hands: Contribute
+- [Tutorials](https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w?ref=creativetim)
+- [Affiliate Program](https://www.creative-tim.com/affiliates/new?ref=adsr-github-readme) (earn money)
+- [Blog Creative Tim](http://blog.creative-tim.com/?ref=adsr-github-readme)
+- [Free Products](https://www.creative-tim.com/bootstrap-themes/free?ref=adsr-github-readme) from Creative Tim
+- [Premium Products](https://www.creative-tim.com/bootstrap-themes/premium?ref=adsr-github-readme) from Creative Tim
+- [React Products](https://www.creative-tim.com/bootstrap-themes/react-themes?ref=adsr-github-readme) from Creative Tim
+- [Angular Products](https://www.creative-tim.com/bootstrap-themes/angular-themes?ref=adsr-github-readme) from Creative Tim
+- [VueJS Products](https://www.creative-tim.com/bootstrap-themes/vuejs-themes?ref=adsr-github-readme) from Creative Tim
+- [More products](https://www.creative-tim.com/bootstrap-themes?ref=adsr-github-readme) from Creative Tim
+- Check our Bundles [here](https://www.creative-tim.com/bundles?ref=adsr-github-readme)
 
-You might encounter some bugs while using this app. You are more than welcome to contribute. Just submit changes via pull request and I will review them before merging. Make sure you follow community guidelines.
+### Social Media
 
-## :gem: Acknowledgements
+Twitter: <https://twitter.com/CreativeTim?ref=creativetim>
 
-Useful resources and dependencies that are used in Modern Portfolio.
+Facebook: <https://www.facebook.com/CreativeTim?ref=creativetim>
 
-<!--- DEPENDENCIES_START --->
-- [@next/font](https://www.npmjs.com/package/@next/font): ^13.4.4
-- [autoprefixer](https://www.npmjs.com/package/autoprefixer): ^10.4.14
-- [eslint](https://www.npmjs.com/package/eslint): 8.41.0
-- [eslint-config-next](https://www.npmjs.com/package/eslint-config-next): 13.4.3
-- [framer-motion](https://www.npmjs.com/package/framer-motion): ^10.12.16
-- [next](https://www.npmjs.com/package/next): 15.5.18
-- [postcss](https://www.npmjs.com/package/postcss): ^8.4.23
-- [react](https://www.npmjs.com/package/react): 18.2.0
-- [react-countup](https://www.npmjs.com/package/react-countup): ^6.4.2
-- [react-dom](https://www.npmjs.com/package/react-dom): 18.2.0
-- [react-icons](https://www.npmjs.com/package/react-icons): ^4.8.0
-- [react-tsparticles](https://www.npmjs.com/package/react-tsparticles): ^2.9.3
-- [swiper](https://www.npmjs.com/package/swiper): ^12.1.2
-- [tailwind-scrollbar](https://www.npmjs.com/package/tailwind-scrollbar): ^3.0.4
-- [tailwindcss](https://www.npmjs.com/package/tailwindcss): ^3.3.2
-- [tsparticles](https://www.npmjs.com/package/tsparticles): ^2.9.3
+Dribbble: <https://dribbble.com/creativetim?ref=creativetim>
 
-<!--- DEPENDENCIES_END --->
-
-## :coffee: Buy Me a Coffee
-
-[<img src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" width="200" />](https://www.buymeacoffee.com/sanidhy "Buy me a Coffee")
-
-## :rocket: Follow Me
-
-[![GitHub followers](https://img.shields.io/github/followers/sanidhyy?style=social&label=Follow&maxAge=2592000)](https://github.com/sanidhyy "Follow Me")
-[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fx.com%2F_sanidhyy)](https://x.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fsanidhyy%2Fmodern-portfolio "Tweet")
-
-## :books: Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## :page_with_curl: Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## :star: Give A Star
-
-You can also give this repository a star to show more people and they can use this repository.
-
-## :star2: Star History
-
-<a href="https://star-history.com/#sanidhyy/modern-portfolio&Timeline">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=sanidhyy/modern-portfolio&type=Timeline&theme=dark" />
-  <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=sanidhyy/modern-portfolio&type=Timeline" />
-  <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=sanidhyy/modern-portfolio&type=Timeline" />
-</picture>
-</a>
-
-<br />
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Instagram: <https://www.instagram.com/CreativeTimOfficial?ref=creativetim> -->
