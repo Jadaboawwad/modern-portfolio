@@ -11,6 +11,18 @@ Dark purple/navy tech aesthetic with red/orange accent glow, clean modern compos
 
 ### Prompts per project
 
+- **WeFix** → `work/work-wefix.png`
+  - Prompt: service platform UI, mobile ticket cards + admin dashboard panels + map pin + technician tools, B2B/B2C workflow, (no text, no logos), dark purple/navy with red/orange accents
+
+- **Nuqayyem** → `work/work-nuqayyem.png`
+  - Prompt: formative assessment app UI, rubric grid + peer/self/instructor assessment nodes + feedback bubbles, (no text, no logos), dark purple/navy with red/orange accents
+
+- **Blinx** → `work/work-blinx.png`
+  - Prompt: digital storytelling media app UI, video player + cast-to-TV + short-form story cards, Gen Z streaming, (no text, no logos), dark purple/navy with red/orange accents
+
+- **ReStaged** → `work/work-restaged.png`
+  - Prompt: furniture sharing marketplace app UI, rent/sell cards + search filters + sofa/chair silhouettes, sustainable staging, (no text, no logos), dark purple/navy with red/orange accents
+
 - **Disease Discovery** → `work/work-disease-discovery.png`
   - Prompt: abstract medical AI dashboard, DNA helix + heartbeat line + classification chart, healthcare analytics interface, (no text, no logos), dark purple/navy with red/orange accents
 

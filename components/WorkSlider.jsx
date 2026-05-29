@@ -77,7 +77,17 @@ const WorkSlider = () => {
                           rel="noreferrer noopener"
                           className={linkButtonClass}
                         >
-                          Live
+                          {image.linkWebsite ? "App" : "Live"}
+                        </Link>
+                      )}
+                      {image.linkWebsite && (
+                        <Link
+                          href={image.linkWebsite}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className={linkButtonClass}
+                        >
+                          Web
                         </Link>
                       )}
                       {(isGithubOnly || hasGithub) && (
@@ -89,7 +99,7 @@ const WorkSlider = () => {
                           aria-label={`${image.name} on GitHub`}
                         >
                           <BsGithub aria-hidden />
-                          GitHub
+                          {image.githubWebsite ? "App" : "GitHub"}
                         </Link>
                       )}
                       {image.githubBackend && (
@@ -102,6 +112,18 @@ const WorkSlider = () => {
                         >
                           <BsGithub aria-hidden />
                           Backend
+                        </Link>
+                      )}
+                      {image.githubWebsite && (
+                        <Link
+                          href={image.githubWebsite}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className={`${linkButtonClass} flex items-center gap-1`}
+                          aria-label={`${image.name} website on GitHub`}
+                        >
+                          <BsGithub aria-hidden />
+                          Web
                         </Link>
                       )}
                     </div>
