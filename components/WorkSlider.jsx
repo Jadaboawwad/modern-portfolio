@@ -23,11 +23,11 @@ const WorkSlider = () => {
         clickable: true,
       }}
       modules={[Pagination]}
-      className="h-[280px] sm:h-[480px]"
+      className="h-[320px] sm:h-[520px]"
     >
       {workSlides.slides.map((slide, i) => (
-        <SwiperSlide key={i}>
-          <div className="grid grid-cols-2 grid-rows-2 gap-4">
+        <SwiperSlide key={i} className="!h-full">
+          <div className="grid h-full min-h-0 grid-cols-2 grid-rows-2 gap-3 sm:gap-4">
             {slide.images.map((image, imageI) => {
               const isGithubOnly = image.link.includes("github.com");
               const hasLive = !isGithubOnly;
@@ -36,16 +36,16 @@ const WorkSlider = () => {
 
               return (
                 <div
-                  className="relative rounded-lg overflow-hidden group"
+                  className="flex min-h-0 flex-col overflow-hidden rounded-lg bg-black/40 group"
                   key={imageI}
                 >
-                  <div className="relative w-full h-full min-h-[120px] sm:min-h-[200px]">
+                  <div className="relative min-h-0 flex-1">
                     <Image
                       src={image.path}
                       alt={image.name}
-                      width={500}
-                      height={300}
-                      className="w-full h-full object-cover"
+                      fill
+                      sizes="(max-width: 640px) 45vw, 280px"
+                      className="object-cover"
                       onError={(e) => {
                         if (image.fallbackPath) {
                           e.currentTarget.src = image.fallbackPath;
@@ -60,8 +60,8 @@ const WorkSlider = () => {
                       </p>
                     </div>
 
-                    {/* links — below title, compact row so they do not cover the bottom label */}
-                    <div className="absolute top-8 sm:top-9 right-1.5 z-30 flex flex-row flex-wrap justify-end gap-1 max-w-[42%] sm:max-w-[48%]">
+                    {/* links — below title */}
+                    <div className="absolute top-8 sm:top-9 right-1.5 z-30 flex max-w-[42%] flex-row flex-wrap justify-end gap-1 sm:max-w-[48%]">
                       {hasLive && (
                         <Link
                           href={image.link}
@@ -119,15 +119,13 @@ const WorkSlider = () => {
                         </Link>
                       )}
                     </div>
+                  </div>
 
-                    {/* stack / label — full-width bottom bar, always visible */}
-                    {bottomLabel ? (
-                      <div className="absolute inset-x-0 bottom-0 z-40 px-2 py-1.5 bg-black/85 backdrop-blur-sm border-t border-white/10">
-                        <p className="text-[9px] sm:text-[10px] font-medium text-white/90 leading-snug text-left line-clamp-2">
-                          {bottomLabel}
-                        </p>
-                      </div>
-                    ) : null}
+                  {/* stack / label — fixed strip below image (never clipped by cover) */}
+                  <div className="shrink-0 border-t border-white/10 bg-black/90 px-2 py-1.5 backdrop-blur-sm">
+                    <p className="text-[9px] font-medium leading-snug text-white/90 sm:text-[10px] line-clamp-2 text-left">
+                      {bottomLabel || "Portfolio project"}
+                    </p>
                   </div>
                 </div>
               );
