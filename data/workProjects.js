@@ -44,7 +44,7 @@ const workProjects = [
   {
     name: "WeMedica",
     stack: "ML Classification · Web App",
-    link: "https://we-medica.vercel.app/",
+    link: "https://wemedica.netlify.app/",
     github: "https://github.com/SuperbaTeam/ai-medica-front-end",
     githubBackend: "https://github.com/SuperbaTeam/ai-medica-back-end",
     path: "/work/work-aimedica.png",
