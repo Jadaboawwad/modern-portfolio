@@ -4,7 +4,7 @@ import { BsGithub } from "react-icons/bs";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { getWorkSlides } from "../data/workProjects";
+import { getProjectLabel, getWorkSlides } from "../data/workProjects";
 
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -32,6 +32,7 @@ const WorkSlider = () => {
               const isGithubOnly = image.link.includes("github.com");
               const hasLive = !isGithubOnly;
               const hasGithub = image.github && image.github !== image.link;
+              const bottomLabel = getProjectLabel(image);
 
               return (
                 <div
@@ -53,23 +54,14 @@ const WorkSlider = () => {
                     />
 
                     {/* project name — top left */}
-                    <div className="absolute top-0 left-0 z-20 max-w-[70%] px-2 py-1.5 bg-black/75 backdrop-blur-sm rounded-br-md">
+                    <div className="absolute top-0 left-0 z-30 max-w-[55%] sm:max-w-[60%] px-2 py-1.5 bg-black/80 backdrop-blur-sm rounded-br-md">
                       <p className="text-[10px] sm:text-xs font-bold text-white leading-tight text-left">
                         {image.name}
                       </p>
                     </div>
 
-                    {/* stack — bottom left */}
-                    {image.stack && (
-                      <div className="absolute bottom-0 left-0 z-20 max-w-[75%] px-2 py-1.5 bg-black/75 backdrop-blur-sm rounded-tr-md">
-                        <p className="text-[9px] sm:text-[10px] font-medium text-white/90 leading-tight text-left">
-                          {image.stack}
-                        </p>
-                      </div>
-                    )}
-
-                    {/* links — top right, always visible */}
-                    <div className="absolute top-1.5 right-1.5 z-30 flex flex-col items-end gap-1">
+                    {/* links — below title, compact row so they do not cover the bottom label */}
+                    <div className="absolute top-8 sm:top-9 right-1.5 z-30 flex flex-row flex-wrap justify-end gap-1 max-w-[42%] sm:max-w-[48%]">
                       {hasLive && (
                         <Link
                           href={image.link}
@@ -127,6 +119,15 @@ const WorkSlider = () => {
                         </Link>
                       )}
                     </div>
+
+                    {/* stack / label — full-width bottom bar, always visible */}
+                    {bottomLabel ? (
+                      <div className="absolute inset-x-0 bottom-0 z-40 px-2 py-1.5 bg-black/85 backdrop-blur-sm border-t border-white/10">
+                        <p className="text-[9px] sm:text-[10px] font-medium text-white/90 leading-snug text-left line-clamp-2">
+                          {bottomLabel}
+                        </p>
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               );

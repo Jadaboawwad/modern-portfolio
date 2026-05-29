@@ -1,9 +1,13 @@
 /**
  * Projects from portfolio/src/views/examples/Landing.js
  * name = project title (top-left)
- * stack = tech / type (bottom-left)
+ * stack / label = tech / type (bottom bar); label falls back to stack in the slider
  * link = Live or GitHub; github / githubBackend when both exist
  */
+
+export function getProjectLabel(project) {
+  return project.label || project.stack || "";
+}
 
 const workProjects = [
   {
@@ -38,7 +42,7 @@ const workProjects = [
     fallbackPath: "/thumb4.jpg",
   },
   {
-    name: "AIMedica",
+    name: "WeMedica",
     stack: "ML Classification · Web App",
     link: "https://we-medica.vercel.app/",
     github: "https://github.com/SuperbaTeam/ai-medica-front-end",
@@ -133,7 +137,12 @@ const workProjects = [
 export function getWorkSlides(chunkSize = 4) {
   const slides = [];
   for (let i = 0; i < workProjects.length; i += chunkSize) {
-    slides.push({ images: workProjects.slice(i, i + chunkSize) });
+    slides.push({
+      images: workProjects.slice(i, i + chunkSize).map((project) => ({
+        ...project,
+        label: getProjectLabel(project),
+      })),
+    });
   }
   return { slides };
 }
