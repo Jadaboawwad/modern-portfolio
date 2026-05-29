@@ -419,7 +419,7 @@ const About = () => {
         <Avatar />
       </motion.div>
 
-      <div className="container mx-auto px-4 sm:px-[15px] py-32 pb-[calc(7.5rem+env(safe-area-inset-bottom,0px))] xl:pb-32 min-h-full flex flex-col items-center xl:flex-row gap-x-6">
+      <div className="container mx-auto px-4 sm:px-[15px] py-32 pb-[calc(11rem+env(safe-area-inset-bottom,0px))] xl:pb-32 min-h-full flex flex-col items-center xl:flex-row gap-x-6">
         {/* text */}
         <div className="flex-1 flex flex-col justify-center">
           <motion.h2
@@ -501,31 +501,29 @@ const About = () => {
           exit="hidden"
           className="flex flex-col w-full max-w-full xl:max-w-[48%] min-h-0 xl:h-[480px]"
         >
-          <div className="w-full max-w-full -mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto scrollbar-hide mb-4">
-            <div
-              className="flex flex-nowrap gap-x-4 xl:gap-x-8 mx-auto xl:mx-0 w-max xl:w-auto justify-start"
-              role="tablist"
-              aria-label="About sections"
-            >
-              {aboutData.map((item, itemI) => (
-                <button
-                  type="button"
-                  key={itemI}
-                  role="tab"
-                  aria-selected={index === itemI}
-                  className={`${
-                    index === itemI &&
-                    "text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300"
-                  } shrink-0 cursor-pointer capitalize text-sm sm:text-base xl:text-lg relative after:w-8 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-0 bg-transparent border-0 text-inherit font-inherit p-0`}
-                  onClick={() => setIndex(itemI)}
-                >
-                  {item.title}
-                </button>
-              ))}
-            </div>
+          <div
+            className="grid grid-cols-5 gap-x-0.5 w-full mb-5 xl:flex xl:gap-x-8 xl:w-auto xl:mb-4"
+            role="tablist"
+            aria-label="About sections"
+          >
+            {aboutData.map((item, itemI) => (
+              <button
+                type="button"
+                key={itemI}
+                role="tab"
+                aria-selected={index === itemI}
+                className={`${
+                  index === itemI &&
+                  "text-accent after:w-full after:bg-accent after:transition-all after:duration-300"
+                } cursor-pointer capitalize text-[clamp(0.4375rem,2.35vw,1.125rem)] leading-tight tracking-tight text-center xl:text-left xl:text-lg xl:tracking-normal relative after:h-[2px] after:bg-white after:absolute after:bottom-0 after:left-0 after:right-0 xl:after:-bottom-1 xl:after:right-auto xl:after:w-8 bg-transparent border-0 text-inherit font-inherit px-0.5 py-1 min-w-0`}
+                onClick={() => setIndex(itemI)}
+              >
+                {item.title}
+              </button>
+            ))}
           </div>
 
-          <div className="py-2 xl:py-6 flex flex-col gap-y-4 xl:gap-y-4 items-center xl:items-start w-full flex-1 min-h-0 xl:overflow-y-auto pr-0 sm:pr-2 scrollbar-hide">
+          <div className="py-2 xl:py-6 flex flex-col gap-y-4 xl:gap-y-4 items-center xl:items-start w-full flex-1 min-h-0 xl:overflow-y-auto pr-0 sm:pr-2 scrollbar-hide pb-4">
             {aboutData[index].info.map((item, itemI) => (
               <div key={itemI} className="w-full">
                 <div className="w-full text-white/60 text-center md:text-left grid gap-y-1 md:grid-cols-[minmax(0,1fr)_auto] md:gap-x-10 md:items-start">
@@ -559,6 +557,11 @@ const About = () => {
                 )}
               </div>
             ))}
+            {/* clearance above mobile bottom nav */}
+            <div
+              className="h-16 shrink-0 xl:hidden"
+              aria-hidden
+            />
           </div>
         </motion.div>
       </div>
