@@ -514,8 +514,8 @@ const About = () => {
                 aria-selected={index === itemI}
                 className={`${
                   index === itemI &&
-                  "text-accent after:w-full after:bg-accent after:transition-all after:duration-300"
-                } cursor-pointer capitalize text-[clamp(0.4375rem,2.35vw,1.125rem)] leading-tight tracking-tight text-center xl:text-left xl:text-lg xl:tracking-normal relative after:h-[2px] after:bg-white after:absolute after:bottom-0 after:left-0 after:right-0 xl:after:-bottom-1 xl:after:right-auto xl:after:w-8 bg-transparent border-0 text-inherit font-inherit px-0.5 py-1 min-w-0`}
+                  "text-accent after:bg-accent after:transition-all after:duration-300"
+                } cursor-pointer capitalize text-[clamp(0.4375rem,2.35vw,1.125rem)] leading-tight tracking-tight text-center xl:text-left xl:text-lg xl:tracking-normal relative after:content-[''] after:block after:h-[2px] after:w-6 sm:after:w-8 after:bg-white after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 xl:after:left-0 xl:after:translate-x-0 xl:after:-bottom-1 bg-transparent border-0 text-inherit font-inherit px-0.5 pb-2 min-w-0`}
                 onClick={() => setIndex(itemI)}
               >
                 {item.title}
