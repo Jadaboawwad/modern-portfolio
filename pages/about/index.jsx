@@ -18,7 +18,11 @@ import {
 
 import Avatar from "../../components/Avatar";
 import Circles from "../../components/Circles";
+import { mechaProjects } from "../../data/mechaProjects";
+import workProjects from "../../data/workProjects";
 import { fadeIn } from "../../variants";
+
+const projectCount = workProjects.length + mechaProjects.length;
 
 const skillsList = [
   "N-tier",
@@ -118,22 +122,6 @@ const codeLanguagesList = [
   "TypeScript",
   "JavaScript",
   "Python",
-];
-
-const projectsList = [
-  "WeFix",
-  "Resource Scheduling in Edge-Intelligence-Enabled Internet of Vehicles (IoV)",
-  "Nuqayyem",
-  "Blinx",
-  "Olive",
-  "ReStaged",
-  "Quantalytics - Q.ai",
-  "AIMedica",
-  "PyArcade Games",
-  "SeAssis",
-  "Bionic Arm using EMG Technology",
-  "Heart Rate Counter",
-  "Dyanamic Traffic Light using Reed Switches and Arduino",
 ];
 
 //  data
@@ -463,7 +451,7 @@ const About = () => {
               {/* projects */}
               <div className="relative flex-1 after:w-[1px] after:h-full after:bg-white/10 after:absolute after:top-0 after:right-0">
                 <div className="text-2xl xl:text-4xl font-extrabold text-accent mb-2">
-                  <CountUp start={0} end={projectsList.length} duration={5} />
+                  <CountUp start={0} end={projectCount} duration={5} />
                 </div>
                 <div className="text-xs uppercase tracking-[1px] leading-[1.4] max-w-[100px]">
                   Projects.

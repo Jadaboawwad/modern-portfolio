@@ -14,8 +14,6 @@ const workProjects = [
     name: "WeFix",
     stack: "Flutter · React OMS · Node · GraphQL · B2B/B2C",
     link: "https://wefix-system.com/",
-    github: "https://github.com/We-Fix-Apps/wefix-frontend-oms",
-    githubBackend: "https://github.com/We-Fix-Apps/wefix-backend-oms",
     path: "/work/work-wefix.png",
     fallbackPath: "/thumb1.jpg",
   },
