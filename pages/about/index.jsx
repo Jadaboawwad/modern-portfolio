@@ -244,9 +244,20 @@ export const aboutData = [
         stage: "Jan 2025",
       },
       {
-        title:
-          "Diploma of Education in Software Development Track — Code Fellows, LTUC",
-        stage: "Amman, Jordan",
+        title: "Code Fellows: Level 102 — Fundamentals",
+        stage: "Jun 2021",
+      },
+      {
+        title: "Code Fellows: Level 201 — Foundation of Software Development",
+        stage: "Jun 2021",
+      },
+      {
+        title: "Code Fellows: Level 301 — Intermediate Software Development",
+        stage: "2021",
+      },
+      {
+        title: "Code Fellows: Level 401 — Advanced Software Development",
+        stage: "Dec 2021",
       },
       {
         title: "Applied Machine Learning — IEEE BAU",
@@ -394,16 +405,7 @@ export const aboutData = [
   },
 ];
 
-const certificatesInfo =
-  aboutData.find((item) => item.title === "certificates")?.info ?? [];
-const educationDiplomaCount =
-  aboutData
-    .find((item) => item.title === "education")
-    ?.info.filter(
-      (entry) =>
-        /diploma/i.test(entry.title) && !/code fellows/i.test(entry.title)
-    ).length ?? 0;
-const certificationCount = certificatesInfo.length + educationDiplomaCount;
+const certificationCount = 40;
 
 const About = () => {
   const [index, setIndex] = useState(0);
