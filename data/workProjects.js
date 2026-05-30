@@ -60,7 +60,7 @@ const workProjects = [
   {
     name: "SeAssis",
     stack: "Web App · NLP",
-    link: "https://seasiss.netlify.app/",
+    link: "https://seassis.netlify.app/",
     github: "https://github.com/jaa-web-applications/seassis",
     githubBackend: "https://github.com/jaa-web-applications/seassis-backend",
     path: "/work/work-seassis.png",
