@@ -125,13 +125,6 @@ const workProjects = [
     path: "/work/work-house-price-regression.png",
     fallbackPath: "/thumb4.jpg",
   },
-  {
-    name: "City Explorer",
-    stack: "Web App · Weather & Movies",
-    link: "https://jadabuawwad-city-explorer.netlify.app/",
-    path: "/work/work-city-explorer.png",
-    fallbackPath: "/thumb1.jpg",
-  },
 ];
 
 export function getWorkSlides(chunkSize = 4) {
