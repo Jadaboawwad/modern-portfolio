@@ -53,6 +53,18 @@ const WorkSlider = () => {
                       }}
                     />
 
+                    {/* business — hover overlay */}
+                    {image.business && (
+                      <div
+                        className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-black/85 px-3 py-6 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100"
+                        aria-hidden
+                      >
+                        <p className="text-center text-[10px] font-medium leading-snug text-white sm:text-xs">
+                          {image.business}
+                        </p>
+                      </div>
+                    )}
+
                     {/* project name — top left */}
                     <div className="absolute top-0 left-0 z-30 max-w-[55%] sm:max-w-[60%] px-2 py-1.5 bg-black/80 backdrop-blur-sm rounded-br-md">
                       <p className="text-[10px] sm:text-xs font-bold text-white leading-tight text-left">
