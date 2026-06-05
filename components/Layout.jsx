@@ -3,7 +3,7 @@ import Head from "next/head";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
 import TopLeftImg from "../components/TopLeftImg";
-import WhatsAppFloat from "../components/WhatsAppFloat";
+import FloatingActions from "../components/FloatingActions";
 
 const Layout = ({ children }) => {
   return (
@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
       <TopLeftImg />
       <Nav />
       <Header />
-      <WhatsAppFloat />
+      <FloatingActions />
 
       {/* main content */}
       {children}
