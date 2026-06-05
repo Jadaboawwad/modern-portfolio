@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import { HiChatBubbleLeftRight, HiXMark } from "react-icons/hi2";
 import { motion, AnimatePresence } from "framer-motion";
 
-const CHATBOT_URL =
-  process.env.NEXT_PUBLIC_CHATBOT_URL ||
-  "https://curable-steerable-obnoxious.ngrok-free.dev";
+const CHATBOT_URL = process.env.NEXT_PUBLIC_CHATBOT_URL || "/chat";
 
-const iframeSrc = `${CHATBOT_URL.replace(/\/$/, "")}/?embed=true&portfolio=true`;
+const iframeSrc = `${CHATBOT_URL.replace(/\/$/, "")}/?portfolio=true`;
 
 const ChatbotFloat = ({ inline = false }) => {
   const [open, setOpen] = useState(false);

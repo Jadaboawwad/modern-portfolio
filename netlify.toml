@@ -7,3 +7,15 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[[edge_functions]]
+  path = "/chat"
+  function = "chat-proxy"
+
+[[edge_functions]]
+  path = "/chat/*"
+  function = "chat-proxy"
+
+[[edge_functions]]
+  path = "/_stcore/*"
+  function = "chat-proxy"
