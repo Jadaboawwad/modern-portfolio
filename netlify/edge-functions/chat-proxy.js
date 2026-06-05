@@ -1,7 +1,27 @@
 const NGROK_ORIGIN = "https://curable-steerable-obnoxious.ngrok-free.dev";
 const NGROK_WS_ORIGIN = NGROK_ORIGIN.replace(/^https/, "wss");
 
-const WS_PATCH = `<script id="portfolio-chat-ws-patch">(function(){var o="${NGROK_WS_ORIGIN}";var W=WebSocket;WebSocket=function(u,p){if(typeof u==="string"&&(u.indexOf("/_stcore/")!==-1||u.indexOf("/chat/_stcore/")!==-1)){u=u.replace(/^wss?:\\/\\/[^/]+/,"");u=u.replace(/^\\/chat/,"");u=o+u;}return new W(u,p);};WebSocket.prototype=W.prototype;WebSocket.CONNECTING=W.CONNECTING;WebSocket.OPEN=W.OPEN;WebSocket.CLOSING=W.CLOSING;WebSocket.CLOSED=W.CLOSED;})();</script>`;
+const STREAMLIT_MODULE_RE =
+  /<script\s+type="module"\s+crossorigin\s+src="(\.\/static\/js\/[^"]+\.js)"><\/script>/;
+
+const INLINE_WS_PATCH = `
+const __portfolioNgrokWs = "${NGROK_WS_ORIGIN}";
+const __portfolioNativeWs = globalThis.WebSocket;
+globalThis.WebSocket = function (url, protocols) {
+  let next = url;
+  if (typeof next === "string" && next.includes("_stcore")) {
+    next = next.replace(/^wss?:\\/\\/[^/]+/, "");
+    next = next.replace(/^\\/chat(?=\\/)/, "");
+    next = __portfolioNgrokWs + next;
+  }
+  return new __portfolioNativeWs(next, protocols);
+};
+globalThis.WebSocket.prototype = __portfolioNativeWs.prototype;
+globalThis.WebSocket.CONNECTING = __portfolioNativeWs.CONNECTING;
+globalThis.WebSocket.OPEN = __portfolioNativeWs.OPEN;
+globalThis.WebSocket.CLOSING = __portfolioNativeWs.CLOSING;
+globalThis.WebSocket.CLOSED = __portfolioNativeWs.CLOSED;
+`;
 
 function upstreamPath(pathname) {
   let path = pathname;
@@ -27,17 +47,25 @@ function buildUpstreamHeaders(request, url) {
   return headers;
 }
 
+function patchStreamlitHtml(html) {
+  if (!STREAMLIT_MODULE_RE.test(html)) {
+    return html;
+  }
+
+  return html.replace(
+    STREAMLIT_MODULE_RE,
+    (_, src) =>
+      `<script type="module">${INLINE_WS_PATCH}await import("${src}");</script>`
+  );
+}
+
 async function injectWebSocketPatch(response) {
   const contentType = response.headers.get("content-type") || "";
   if (!contentType.includes("text/html")) {
     return response;
   }
 
-  const html = await response.text();
-  const patched = html.includes("</head>")
-    ? html.replace("</head>", `${WS_PATCH}</head>`)
-    : `${WS_PATCH}${html}`;
-
+  const patched = patchStreamlitHtml(await response.text());
   const headers = new Headers(response.headers);
   headers.delete("content-length");
 
