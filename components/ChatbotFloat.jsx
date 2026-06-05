@@ -72,14 +72,24 @@ const ChatbotFloat = ({ inline = false }) => {
                     Ask about my experience, skills, certifications, and background
                   </p>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  aria-label="Close chat"
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
-                >
-                  <HiXMark className="text-xl" aria-hidden />
-                </button>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={iframeSrc}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="text-[11px] font-medium text-white/70 underline-offset-2 hover:text-white hover:underline"
+                  >
+                    Open in tab
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    aria-label="Close chat"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+                  >
+                    <HiXMark className="text-xl" aria-hidden />
+                  </button>
+                </div>
               </div>
 
               <iframe
