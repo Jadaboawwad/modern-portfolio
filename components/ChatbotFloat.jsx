@@ -6,7 +6,7 @@ const CHATBOT_URL =
   process.env.NEXT_PUBLIC_CHATBOT_URL ||
   "https://curable-steerable-obnoxious.ngrok-free.dev";
 
-const iframeSrc = `${CHATBOT_URL.replace(/\/$/, "")}/?embed=true`;
+const iframeSrc = `${CHATBOT_URL.replace(/\/$/, "")}/?embed=true&portfolio=true`;
 
 const ChatbotFloat = ({ inline = false }) => {
   const [open, setOpen] = useState(false);
@@ -61,7 +61,7 @@ const ChatbotFloat = ({ inline = false }) => {
               role="dialog"
               aria-modal="true"
               aria-label="AI chat assistant"
-              className="fixed z-[60] flex flex-col overflow-hidden bg-secondary border border-white/10 shadow-2xl inset-x-0 bottom-0 h-[min(78vh,640px)] rounded-t-2xl md:inset-x-auto md:bottom-28 md:right-8 md:w-[min(420px,calc(100vw-2rem))] md:h-[min(560px,calc(100vh-8rem))] md:rounded-2xl xl:right-24"
+              className="fixed z-[60] flex flex-col overflow-hidden bg-secondary border border-white/10 shadow-2xl inset-x-0 bottom-0 h-[min(78vh,640px)] rounded-t-2xl md:inset-x-auto md:bottom-28 md:right-8 md:w-[min(420px,calc(100vw-2rem))] md:h-[min(560px,calc(100vh-8rem))] md:rounded-2xl xl:right-[calc(2%+6rem)] xl:w-[min(400px,calc(100vw-12rem))]"
               initial={{ opacity: 0, y: 24, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 24, scale: 0.98 }}
@@ -73,7 +73,7 @@ const ChatbotFloat = ({ inline = false }) => {
                     Portfolio Assistant
                   </p>
                   <p className="text-[11px] text-white/60">
-                    Ask about my work, skills, or experience
+                    Ask about my experience, skills, certifications, and background
                   </p>
                 </div>
                 <button
