@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { HiChatBubbleLeftRight, HiXMark } from "react-icons/hi2";
 import { motion, AnimatePresence } from "framer-motion";
 
-const iframeSrc = "https://jehadabuawwad.com/chat/?portfolio=true";
+const iframeSrc =
+  "https://jehadabuawwad.com/chat/?portfolio=true&_cv=4";
 
 const ChatbotFloat = ({ inline = false }) => {
   const [open, setOpen] = useState(false);

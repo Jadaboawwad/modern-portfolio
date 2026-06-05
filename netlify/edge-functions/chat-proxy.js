@@ -8,7 +8,9 @@ const STREAMLIT_MODULE_RE =
 const INLINE_WS_PATCH = `
 function __portfolioRewriteWs(url) {
   if (typeof url !== "string" || !url.includes("_stcore")) return url;
-  const path = url.replace(/^wss?:\\/\\/[^/]+/, "").replace(/^\\/chat(?=\\/)/, "");
+  const path = url
+    .replace(/^wss?:\\/\\/[^/]+(?::\\d+)?/, "")
+    .replace(/^\\/chat(?=\\/)/, "");
   return "${NGROK_WS_ORIGIN}" + path;
 }
 const __portfolioNativeWs = globalThis.WebSocket;
@@ -23,7 +25,10 @@ globalThis.WebSocket.CLOSED = __portfolioNativeWs.CLOSED;
 `;
 
 const STREAMLIT_BUNDLE_WS_RE = /this\.websocket=new WebSocket\(nt,/g;
-const STREAMLIT_BUNDLE_HELPER = `function __portfolioRewriteWs(g){if(typeof g!=="string"||!g.includes("_stcore"))return g;const h=g.replace(/^wss?:\\/\\/[^/]+/,"").replace(/^\\/chat(?=\\/)/,"");return"${NGROK_WS_ORIGIN}"+h;}`;
+const BUILD_WS_URI_OLD =
+  'function buildWsUri({host:tt,port:nt,basePath:et},rt){const ot=isHttps()?"wss":"ws",at=makePath(et,rt);return`${ot}://${tt}:${nt}/${at}`}';
+const STREAMLIT_BUNDLE_HELPER = `function __portfolioRewriteWs(g){if(typeof g!=="string"||!g.includes("_stcore"))return g;const h=g.replace(/^wss?:\\/\\/[^/]+(?::\\d+)?/,"").replace(/^\\/chat(?=\\/)/,"");return"${NGROK_WS_ORIGIN}"+h;}`;
+const BUILD_WS_URI_PATCH = `function buildWsUri({host:tt,port:nt,basePath:et},rt){const at=makePath("",rt);return"${NGROK_WS_ORIGIN}/"+at}`;
 
 function upstreamPath(pathname) {
   let path = pathname;
@@ -62,21 +67,35 @@ function patchStreamlitHtml(html) {
 }
 
 function patchStreamlitBundle(js) {
-  if (!js.includes("connectToWebSocket") || js.includes("__portfolioRewriteWs")) {
+  if (!js.includes("connectToWebSocket")) {
     return js;
   }
 
-  if (STREAMLIT_BUNDLE_WS_RE.test(js)) {
-    return (
-      STREAMLIT_BUNDLE_HELPER +
-      js.replace(
-        STREAMLIT_BUNDLE_WS_RE,
-        "this.websocket=new WebSocket(__portfolioRewriteWs(nt),"
-      )
+  let patched = js;
+
+  if (patched.includes(BUILD_WS_URI_OLD)) {
+    patched = patched.replace(BUILD_WS_URI_OLD, BUILD_WS_URI_PATCH);
+  }
+
+  if (patched.includes("this.websocket=new WebSocket(nt,")) {
+    patched = patched.replace(
+      STREAMLIT_BUNDLE_WS_RE,
+      "this.websocket=new WebSocket(__portfolioRewriteWs(nt),"
     );
   }
 
-  return js;
+  if (!patched.includes("function __portfolioRewriteWs")) {
+    patched = STREAMLIT_BUNDLE_HELPER + patched;
+  }
+
+  return patched;
+}
+
+function withNoStoreHeaders(response) {
+  const headers = new Headers(response.headers);
+  headers.set("cache-control", "no-store, no-cache, must-revalidate");
+  headers.delete("content-length");
+  return headers;
 }
 
 async function patchHostConfig(response) {
@@ -86,9 +105,8 @@ async function patchHostConfig(response) {
     origins.add(PORTFOLIO_ORIGIN);
     origins.add("https://www.jehadabuawwad.com");
     config.allowedOrigins = [...origins];
-    const headers = new Headers(response.headers);
+    const headers = withNoStoreHeaders(response);
     headers.set("content-type", "application/json");
-    headers.delete("content-length");
     return new Response(JSON.stringify(config), {
       status: response.status,
       statusText: response.statusText,
@@ -113,8 +131,7 @@ async function transformResponse(response, requestUrl) {
     (contentType.includes("javascript") || contentType.includes("ecmascript"))
   ) {
     const patched = patchStreamlitBundle(await response.text());
-    const headers = new Headers(response.headers);
-    headers.delete("content-length");
+    const headers = withNoStoreHeaders(response);
     return new Response(patched, {
       status: response.status,
       statusText: response.statusText,
@@ -124,8 +141,7 @@ async function transformResponse(response, requestUrl) {
 
   if (contentType.includes("text/html")) {
     const patched = patchStreamlitHtml(await response.text());
-    const headers = new Headers(response.headers);
-    headers.delete("content-length");
+    const headers = withNoStoreHeaders(response);
     return new Response(patched, {
       status: response.status,
       statusText: response.statusText,
