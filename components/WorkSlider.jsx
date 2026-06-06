@@ -14,7 +14,7 @@ import "swiper/css/pagination";
 const workSlides = getWorkSlides(4);
 
 const linkButtonClass =
-  "px-2 py-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-wide bg-accent text-white rounded shadow-md hover:bg-accent/80 transition-colors";
+  "relative z-50 touch-manipulation px-2 py-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-wide bg-accent text-white rounded shadow-md hover:bg-accent/80 transition-colors";
 
 const WorkSlider = () => {
   const [expandedCard, setExpandedCard] = useState(null);
@@ -93,7 +93,7 @@ const WorkSlider = () => {
                         className={`pointer-events-none absolute inset-0 z-40 flex bg-black/92 transition-opacity duration-300 backdrop-blur-sm max-md:items-start max-md:justify-start max-md:px-3.5 max-md:pt-3 max-md:pb-4 md:items-center md:justify-center md:px-5 md:py-8 ${
                           isExpanded
                             ? "opacity-100"
-                            : "opacity-0 max-md:opacity-0 md:group-hover/card:opacity-100"
+                            : "opacity-0 [@media(hover:hover)]:group-hover/card:opacity-100"
                         }`}
                       >
                         <p
@@ -111,7 +111,7 @@ const WorkSlider = () => {
                       className={`absolute top-0 left-0 z-30 max-w-[70%] rounded-br-md bg-black/80 px-2.5 py-2 backdrop-blur-sm transition-opacity duration-300 ${
                         hideChrome
                           ? "max-md:invisible max-md:opacity-0"
-                          : "opacity-100 md:group-hover/card:opacity-0"
+                          : "opacity-100 [@media(hover:hover)]:group-hover/card:opacity-0"
                       }`}
                     >
                       <p className="text-left text-[10px] font-bold leading-tight text-white sm:text-xs">
@@ -119,12 +119,12 @@ const WorkSlider = () => {
                       </p>
                     </div>
 
-                    {/* links — top right; hidden when description is shown */}
+                    {/* links — always tappable; stay above hover overlay */}
                     <div
-                      className={`absolute top-2 right-2 z-30 flex max-w-[48%] flex-row flex-wrap justify-end gap-1 transition-opacity duration-300 ${
+                      className={`absolute top-2 right-2 z-50 flex max-w-[48%] flex-row flex-wrap justify-end gap-1 ${
                         hideChrome
                           ? "pointer-events-none max-md:invisible max-md:opacity-0"
-                          : "opacity-100 md:group-hover/card:pointer-events-none md:group-hover/card:opacity-0"
+                          : "opacity-100"
                       }`}
                     >
                       {hasLive && (
