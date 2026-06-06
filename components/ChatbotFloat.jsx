@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { HiChatBubbleLeftRight, HiXMark } from "react-icons/hi2";
+import { HiArrowPath, HiChatBubbleLeftRight, HiXMark } from "react-icons/hi2";
 import { motion, AnimatePresence } from "framer-motion";
 
 const iframeSrc =
@@ -7,6 +7,13 @@ const iframeSrc =
 
 const ChatbotFloat = ({ inline = false }) => {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      setLoading(true);
+    }
+  }, [open]);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -93,13 +100,38 @@ const ChatbotFloat = ({ inline = false }) => {
                 </div>
               </div>
 
-              <iframe
-                title="Portfolio AI chat"
-                src={iframeSrc}
-                className="min-h-0 flex-1 w-full border-0 bg-white"
-                allow="clipboard-read; clipboard-write"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+              <div className="relative min-h-0 flex-1 bg-white">
+                {loading && (
+                  <div
+                    className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-primary/95"
+                    role="status"
+                    aria-live="polite"
+                    aria-label="Loading portfolio assistant"
+                  >
+                    <HiArrowPath
+                      className="h-10 w-10 animate-spin text-accent"
+                      aria-hidden
+                    />
+                    <div className="text-center px-6">
+                      <p className="text-sm font-semibold text-white">
+                        Loading assistant…
+                      </p>
+                      <p className="mt-1 text-[11px] text-white/60">
+                        Connecting to the chat service
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                <iframe
+                  title="Portfolio AI chat"
+                  src={iframeSrc}
+                  className="h-full w-full border-0 bg-white"
+                  allow="clipboard-read; clipboard-write"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  onLoad={() => setLoading(false)}
+                />
+              </div>
             </motion.div>
           </>
         )}
