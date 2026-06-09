@@ -3,6 +3,7 @@ import { HiArrowPath } from "react-icons/hi2";
 import {
   UI,
   detectLanguage,
+  retryRagApiConnection,
   sendPortfolioQuestion,
   warmupRagApi,
 } from "../lib/portfolioChat";
@@ -34,6 +35,7 @@ const PortfolioChatPanel = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
+  const [retrying, setRetrying] = useState(false);
   const bottomRef = useRef(null);
   const strings = UI[language];
 
@@ -68,6 +70,13 @@ const PortfolioChatPanel = () => {
   const switchLanguage = (code) => {
     if (code === language) return;
     setLanguage(code);
+  };
+
+  const handleRetryConnection = async () => {
+    setRetrying(true);
+    const ok = await retryRagApiConnection();
+    setReady(ok);
+    setRetrying(false);
   };
 
   const handleSubmit = async (event) => {
@@ -147,9 +156,24 @@ const PortfolioChatPanel = () => {
 
       <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-3 py-4 scrollbar-thin scrollbar-thumb-white/20">
         {!ready && (
-          <p className="rounded-lg bg-amber-500/15 px-3 py-2 text-sm text-amber-100/90">
-            Chat service is offline. Start Docker + ngrok, then try again.
-          </p>
+          <div
+            dir={language === "ar" ? "rtl" : "ltr"}
+            className="rounded-xl border border-amber-500/25 bg-amber-500/10 px-3.5 py-3 text-sm leading-relaxed text-amber-50/95"
+            role="status"
+          >
+            <p>{strings.offline}</p>
+            <button
+              type="button"
+              onClick={handleRetryConnection}
+              disabled={retrying}
+              className="mt-2.5 inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-1.5 text-[13px] font-medium text-white transition-colors hover:bg-white/15 disabled:opacity-60"
+            >
+              {retrying && (
+                <HiArrowPath className="h-4 w-4 animate-spin" aria-hidden />
+              )}
+              {strings.retry}
+            </button>
+          </div>
         )}
 
         {messages.map((message, index) => (
