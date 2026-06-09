@@ -35,16 +35,7 @@ const PortfolioChatPanel = () => {
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const bottomRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
   const strings = UI[language];
-
-  useEffect(() => {
-    const media = window.matchMedia("(max-width: 767px)");
-    const sync = () => setIsMobile(media.matches);
-    sync();
-    media.addEventListener("change", sync);
-    return () => media.removeEventListener("change", sync);
-  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -179,7 +170,7 @@ const PortfolioChatPanel = () => {
         onSubmit={handleSubmit}
         className="shrink-0 border-t border-white/10 bg-black/30 p-3"
       >
-        <div className="flex flex-col gap-2 md:flex-row md:items-end">
+        <div className="flex flex-col gap-2">
           <textarea
             value={input}
             onChange={(event) => setInput(event.target.value)}
@@ -189,16 +180,16 @@ const PortfolioChatPanel = () => {
                 handleSubmit(event);
               }
             }}
-            rows={isMobile ? 3 : 1}
+            rows={2}
             dir={language === "ar" ? "rtl" : "ltr"}
             placeholder={strings.placeholder}
             disabled={sending}
-            className="w-full max-h-36 flex-1 resize-none rounded-xl border border-white/10 bg-white/5 px-3.5 py-3 text-[15px] leading-snug text-white placeholder:text-white/40 focus:border-accent/60 focus:outline-none disabled:opacity-60 max-md:min-h-[6.25rem] md:min-h-[48px]"
+            className="w-full max-h-36 min-h-[5.75rem] flex-1 resize-none overflow-y-auto rounded-xl border border-white/10 bg-white/5 px-3.5 py-3 text-[15px] leading-normal text-white placeholder:text-white/40 focus:border-accent/60 focus:outline-none disabled:opacity-60 max-md:min-h-[6.5rem]"
           />
           <button
             type="submit"
             disabled={sending || !input.trim()}
-            className="shrink-0 rounded-xl bg-accent px-4 py-3 text-[15px] font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40 md:self-auto max-md:w-full"
+            className="w-full shrink-0 rounded-xl bg-accent px-4 py-3 text-[15px] font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
           >
             Send
           </button>
