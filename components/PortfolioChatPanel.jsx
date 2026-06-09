@@ -7,6 +7,7 @@ import {
   sendPortfolioQuestion,
   warmupRagApi,
 } from "../lib/portfolioChat";
+import { renderBidiContent } from "../lib/formatBidiText";
 
 function MessageBubble({ role, content, language }) {
   const isUser = role === "user";
@@ -22,7 +23,7 @@ function MessageBubble({ role, content, language }) {
             : "bg-white/10 text-white/95 rounded-bl-md"
         }`}
       >
-        {content}
+        {renderBidiContent(content, language)}
       </div>
     </div>
   );
