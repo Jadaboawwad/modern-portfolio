@@ -15,7 +15,7 @@ function MessageBubble({ role, content, language }) {
     <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
       <div
         dir={isArabic ? "rtl" : "ltr"}
-        className={`max-w-[92%] whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed ${
+        className={`max-w-[92%] whitespace-pre-wrap rounded-2xl px-4 py-3 text-[15px] leading-relaxed ${
           isUser
             ? "bg-accent text-white rounded-br-md"
             : "bg-white/10 text-white/95 rounded-bl-md"
@@ -35,7 +35,16 @@ const PortfolioChatPanel = () => {
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const bottomRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
   const strings = UI[language];
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const sync = () => setIsMobile(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -107,8 +116,8 @@ const PortfolioChatPanel = () => {
       >
         <HiArrowPath className="h-8 w-8 animate-spin text-accent" aria-hidden />
         <div className="text-center px-6">
-          <p className="text-sm font-semibold text-white">Loading assistant…</p>
-          <p className="mt-1 text-[11px] text-white/60">Waking up the chat service</p>
+          <p className="text-base font-semibold text-white">Loading assistant…</p>
+          <p className="mt-1 text-sm text-white/60">Waking up the chat service</p>
         </div>
       </div>
     );
@@ -120,7 +129,7 @@ const PortfolioChatPanel = () => {
         <button
           type="button"
           onClick={() => switchLanguage("en")}
-          className={`rounded-full px-3 py-1 text-[11px] font-medium transition-colors ${
+          className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors ${
             language === "en"
               ? "bg-accent text-white"
               : "bg-white/10 text-white/70 hover:bg-white/15"
@@ -131,7 +140,7 @@ const PortfolioChatPanel = () => {
         <button
           type="button"
           onClick={() => switchLanguage("ar")}
-          className={`rounded-full px-3 py-1 text-[11px] font-medium transition-colors ${
+          className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors ${
             language === "ar"
               ? "bg-accent text-white"
               : "bg-white/10 text-white/70 hover:bg-white/15"
@@ -143,7 +152,7 @@ const PortfolioChatPanel = () => {
 
       <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-3 py-4 scrollbar-thin scrollbar-thumb-white/20">
         {!ready && (
-          <p className="rounded-lg bg-amber-500/15 px-3 py-2 text-[11px] text-amber-100/90">
+          <p className="rounded-lg bg-amber-500/15 px-3 py-2 text-sm text-amber-100/90">
             Chat service is offline. Start Docker + ngrok, then try again.
           </p>
         )}
@@ -158,8 +167,8 @@ const PortfolioChatPanel = () => {
         ))}
 
         {sending && (
-          <div className="flex items-center gap-2 text-[11px] text-white/60">
-            <HiArrowPath className="h-4 w-4 animate-spin text-accent" aria-hidden />
+          <div className="flex items-center gap-2 text-sm text-white/60">
+            <HiArrowPath className="h-5 w-5 animate-spin text-accent" aria-hidden />
             {strings.searching}
           </div>
         )}
@@ -170,7 +179,7 @@ const PortfolioChatPanel = () => {
         onSubmit={handleSubmit}
         className="shrink-0 border-t border-white/10 bg-black/30 p-3"
       >
-        <div className="flex items-end gap-2">
+        <div className="flex flex-col gap-2 md:flex-row md:items-end">
           <textarea
             value={input}
             onChange={(event) => setInput(event.target.value)}
@@ -180,16 +189,16 @@ const PortfolioChatPanel = () => {
                 handleSubmit(event);
               }
             }}
-            rows={1}
+            rows={isMobile ? 3 : 1}
             dir={language === "ar" ? "rtl" : "ltr"}
             placeholder={strings.placeholder}
             disabled={sending}
-            className="max-h-28 min-h-[42px] flex-1 resize-none rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-[13px] text-white placeholder:text-white/40 focus:border-accent/60 focus:outline-none disabled:opacity-60"
+            className="w-full max-h-36 flex-1 resize-none rounded-xl border border-white/10 bg-white/5 px-3.5 py-3 text-[15px] leading-snug text-white placeholder:text-white/40 focus:border-accent/60 focus:outline-none disabled:opacity-60 max-md:min-h-[6.25rem] md:min-h-[48px]"
           />
           <button
             type="submit"
             disabled={sending || !input.trim()}
-            className="rounded-xl bg-accent px-4 py-2.5 text-[13px] font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+            className="shrink-0 rounded-xl bg-accent px-4 py-3 text-[15px] font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40 md:self-auto max-md:w-full"
           >
             Send
           </button>

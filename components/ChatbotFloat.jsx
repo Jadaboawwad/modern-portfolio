@@ -72,10 +72,10 @@ const ChatbotFloat = ({ inline = false }) => {
             >
               <div className="flex shrink-0 items-center justify-between gap-3 border-b border-white/10 bg-black/40 px-4 py-3">
                 <div>
-                  <p className="text-sm font-semibold text-white">
+                  <p className="text-base font-semibold text-white">
                     Portfolio Assistant
                   </p>
-                  <p className="text-[11px] text-white/60">
+                  <p className="text-sm text-white/60">
                     Ask about my experience, skills, certifications, and background
                   </p>
                 </div>
@@ -84,7 +84,7 @@ const ChatbotFloat = ({ inline = false }) => {
                     href={STREAMLIT_TAB_URL}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="text-[11px] font-medium text-white/70 underline-offset-2 hover:text-white hover:underline"
+                    className="text-sm font-medium text-white/70 underline-offset-2 hover:text-white hover:underline"
                   >
                     Open in tab
                   </a>
