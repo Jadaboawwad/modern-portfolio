@@ -1,69 +1,18 @@
-import { useEffect, useRef, useState } from "react";
-import { HiArrowPath, HiChatBubbleLeftRight, HiXMark } from "react-icons/hi2";
+import { useEffect, useState } from "react";
+import { HiChatBubbleLeftRight, HiXMark } from "react-icons/hi2";
 import { motion, AnimatePresence } from "framer-motion";
+import PortfolioChatPanel from "./PortfolioChatPanel";
+import { warmupRagApi } from "../lib/portfolioChat";
 
-const iframeSrc =
-  "https://jehadabuawwad.com/chat/?portfolio=true&_cv=4";
-
-const LOAD_POLL_MS = 250;
-const LOAD_TIMEOUT_MS = 90000;
-
-function isStreamlitReady(iframe) {
-  try {
-    const win = iframe.contentWindow;
-    const doc = iframe.contentDocument;
-    if (!win || !doc) return false;
-
-    if (win.prerenderReady === true) return true;
-
-    const app = doc.querySelector("[data-testid='stApp']");
-    if (!app) return false;
-
-    const stillBooting = doc.querySelector("[data-testid='stSpinner']");
-    const hasChatUi =
-      doc.querySelector("[data-testid='stChatInput']") ||
-      doc.querySelector("textarea") ||
-      doc.querySelector("[data-testid='stTextInput']");
-
-    return Boolean(hasChatUi && !stillBooting);
-  } catch {
-    return false;
-  }
-}
+const STREAMLIT_TAB_URL =
+  "https://jehadabuawwad.com/chat/?portfolio=true&_cv=5";
 
 const ChatbotFloat = ({ inline = false }) => {
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const iframeRef = useRef(null);
 
   useEffect(() => {
-    if (!open) return undefined;
-
-    setLoading(true);
-    const started = Date.now();
-    let timerId;
-
-    const pollReady = () => {
-      const iframe = iframeRef.current;
-      if (iframe && isStreamlitReady(iframe)) {
-        setLoading(false);
-        return;
-      }
-
-      if (Date.now() - started >= LOAD_TIMEOUT_MS) {
-        setLoading(false);
-        return;
-      }
-
-      timerId = window.setTimeout(pollReady, LOAD_POLL_MS);
-    };
-
-    timerId = window.setTimeout(pollReady, LOAD_POLL_MS);
-
-    return () => {
-      window.clearTimeout(timerId);
-    };
-  }, [open]);
+    warmupRagApi();
+  }, []);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -132,7 +81,7 @@ const ChatbotFloat = ({ inline = false }) => {
                 </div>
                 <div className="flex items-center gap-2">
                   <a
-                    href={iframeSrc}
+                    href={STREAMLIT_TAB_URL}
                     target="_blank"
                     rel="noreferrer noopener"
                     className="text-[11px] font-medium text-white/70 underline-offset-2 hover:text-white hover:underline"
@@ -150,39 +99,8 @@ const ChatbotFloat = ({ inline = false }) => {
                 </div>
               </div>
 
-              <div className="relative min-h-0 flex-1 bg-primary">
-                {loading && (
-                  <div
-                    className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-primary/95"
-                    role="status"
-                    aria-live="polite"
-                    aria-label="Loading portfolio assistant"
-                  >
-                    <HiArrowPath
-                      className="h-10 w-10 animate-spin text-accent"
-                      aria-hidden
-                    />
-                    <div className="text-center px-6">
-                      <p className="text-sm font-semibold text-white">
-                        Loading assistant…
-                      </p>
-                      <p className="mt-1 text-[11px] text-white/60">
-                        Connecting to the chat service
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                <iframe
-                  ref={iframeRef}
-                  title="Portfolio AI chat"
-                  src={iframeSrc}
-                  className={`h-full w-full border-0 bg-primary transition-opacity duration-300 ${
-                    loading ? "pointer-events-none opacity-0" : "opacity-100"
-                  }`}
-                  allow="clipboard-read; clipboard-write"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
+              <div className="relative min-h-0 flex-1">
+                <PortfolioChatPanel />
               </div>
             </motion.div>
           </>

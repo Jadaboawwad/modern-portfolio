@@ -6,8 +6,9 @@
   ignore = "git diff HEAD^ HEAD --name-only | grep -qEv '(\\.md$|LICENSE$|\\.env\\.example$|^\\.github/|^\\.vscode/)' && exit 1 || exit 0"
 
 [build.environment]
-  # Do not point this at ngrok — chat loads via same-origin /chat edge proxy.
+  # Same-origin proxies — do not point these at ngrok directly.
   NEXT_PUBLIC_CHATBOT_URL = "https://jehadabuawwad.com/chat"
+  NEXT_PUBLIC_RAG_API_URL = "/rag-api"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
@@ -23,3 +24,11 @@
 [[edge_functions]]
   path = "/_stcore/*"
   function = "chat-proxy"
+
+[[edge_functions]]
+  path = "/rag-api"
+  function = "api-proxy"
+
+[[edge_functions]]
+  path = "/rag-api/*"
+  function = "api-proxy"
