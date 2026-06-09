@@ -6,9 +6,10 @@
   ignore = "git diff HEAD^ HEAD --name-only | grep -qEv '(\\.md$|LICENSE$|\\.env\\.example$|^\\.github/|^\\.vscode/)' && exit 1 || exit 0"
 
 [build.environment]
-  # Same-origin proxies — do not point these at ngrok directly.
   NEXT_PUBLIC_CHATBOT_URL = "https://jehadabuawwad.com/chat"
-  NEXT_PUBLIC_RAG_API_URL = "/rag-api"
+  # Chat POST bypasses Netlify edge (~26s timeout). Browser → ngrok → gateway :9080.
+  # Update when your ngrok URL changes (same as netlify/edge-functions/chat-proxy.js).
+  NEXT_PUBLIC_RAG_API_URL = "https://curable-steerable-obnoxious.ngrok-free.dev"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

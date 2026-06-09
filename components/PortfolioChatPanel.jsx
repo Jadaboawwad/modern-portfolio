@@ -87,10 +87,14 @@ const PortfolioChatPanel = () => {
         { role: "assistant", content: answer, language: replyLang },
       ]);
       setReady(true);
-    } catch {
+    } catch (error) {
+      const message =
+        error instanceof Error && error.message
+          ? error.message
+          : strings.error;
       setMessages((current) => [
         ...current,
-        { role: "assistant", content: strings.error, language },
+        { role: "assistant", content: message, language },
       ]);
       setReady(false);
     } finally {
