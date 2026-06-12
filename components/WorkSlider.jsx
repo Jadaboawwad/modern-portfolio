@@ -30,7 +30,7 @@ const WorkSlider = () => {
         clickable: true,
       }}
       modules={[Pagination]}
-      className="h-[min(72vh,480px)] sm:h-[520px]"
+      className="h-[320px] w-full sm:h-[520px]"
     >
       {workSlides.slides.map((slide, i) => (
         <SwiperSlide key={i} className="!h-full">

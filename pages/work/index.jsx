@@ -7,12 +7,12 @@ import { fadeIn } from "../../variants";
 
 const Work = () => {
   return (
-    <div className="min-h-full bg-primary/30 pb-28 pt-4 pr-14 max-xl:overflow-y-auto sm:pr-16 xl:flex xl:h-full xl:items-center xl:py-36 xl:pr-0">
+    <div className="flex min-h-full items-center justify-center bg-primary/30 pb-28 pt-4 max-xl:overflow-y-auto xl:h-full xl:py-36">
       <Circles />
-      <div className="container mx-auto">
-        <div className="flex flex-col xl:flex-row gap-x-8">
+      <div className="container mx-auto px-4 sm:px-[15px]">
+        <div className="flex flex-col items-center gap-y-6 xl:flex-row xl:items-center xl:gap-x-8">
           {/* text */}
-          <div className="text-center flex xl:w-[30vw] flex-col lg:text-left mb-4 xl:mb-0">
+          <div className="flex w-full max-w-[400px] flex-col text-center xl:w-[30vw] xl:max-w-none xl:text-left">
             <motion.h2
               variants={fadeIn("up", 0.2)}
               initial="hidden"
@@ -27,7 +27,7 @@ const Work = () => {
               initial="hidden"
               animate="show"
               exit="hidden"
-              className="mb-4 max-w-[400px] mx-auto lg:mx-0"
+              className="mb-4 mx-auto xl:mx-0"
             >
               A selection of my projects across AI/ML, web apps, and mobile apps
               (including live deployments and open-source repositories).
@@ -40,7 +40,7 @@ const Work = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="w-full xl:max-w-[65%]"
+            className="flex w-full max-w-[560px] justify-center pr-12 sm:max-w-[600px] sm:pr-14 xl:max-w-[65%] xl:pr-0"
           >
             <WorkSlider />
           </motion.div>
