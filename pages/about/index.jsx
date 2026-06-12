@@ -425,7 +425,7 @@ const About = () => {
         <Avatar />
       </motion.div>
 
-      <div className="container mx-auto px-4 sm:px-[15px] py-32 pb-[calc(11rem+env(safe-area-inset-bottom,0px))] xl:pb-32 min-h-full flex flex-col items-center xl:flex-row gap-x-6">
+      <div className="container mx-auto px-4 sm:px-[15px] pt-4 pb-[calc(11rem+env(safe-area-inset-bottom,0px))] xl:py-32 xl:pb-32 min-h-full flex flex-col items-center xl:flex-row gap-x-6">
         {/* text */}
         <div className="flex-1 flex flex-col justify-center">
           <motion.h2

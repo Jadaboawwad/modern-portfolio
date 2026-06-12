@@ -34,8 +34,10 @@ const Layout = ({ children }) => {
       <Header />
       <FloatingActions />
 
-      {/* main content */}
-      {children}
+      {/* main content — offset below fixed mobile header */}
+      <div className="relative min-h-0 flex-1 pt-14 sm:pt-16 xl:pt-0">
+        {children}
+      </div>
     </main>
   );
 };
