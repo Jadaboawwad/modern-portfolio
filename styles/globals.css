@@ -27,6 +27,21 @@
   background-color: #f13024;
 }
 
+.work-slider .swiper-pagination {
+  position: relative !important;
+  bottom: auto !important;
+  margin-top: 1rem;
+  padding-top: 0.25rem;
+}
+
+.work-slider .swiper-pagination-bullet {
+  opacity: 0.45;
+}
+
+.work-slider .swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
 .swiper-button-next:after,
 .swiper-button-prev:after,
 .swiper-button-next:after,

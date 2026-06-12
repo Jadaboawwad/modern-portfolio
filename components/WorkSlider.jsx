@@ -50,11 +50,9 @@ const WorkSlider = () => {
         clickable: true,
       }}
       modules={[Pagination]}
-      className={
-        isMobileLayout
-          ? "w-full pb-10"
-          : "h-[320px] w-full sm:h-[520px]"
-      }
+      className={`work-slider w-full ${
+        isMobileLayout ? "" : "h-[320px] sm:h-[520px]"
+      }`}
     >
       {workSlides.slides.map((slide, i) => (
         <SwiperSlide key={i} className={isMobileLayout ? "!h-auto" : "!h-full"}>
