@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BsGithub } from "react-icons/bs";
@@ -11,13 +11,31 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
-const workSlides = getWorkSlides(4);
+const MOBILE_CHUNK = 1;
+const DESKTOP_CHUNK = 4;
+const MOBILE_BREAKPOINT = 640;
 
 const linkButtonClass =
-  "relative z-50 touch-manipulation px-2 py-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-wide bg-accent text-white rounded shadow-md hover:bg-accent/80 transition-colors";
+  "relative z-50 touch-manipulation px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide bg-accent text-white rounded shadow-md hover:bg-accent/80 transition-colors sm:text-[11px]";
 
 const WorkSlider = () => {
   const [expandedCard, setExpandedCard] = useState(null);
+  const [chunkSize, setChunkSize] = useState(DESKTOP_CHUNK);
+
+  useEffect(() => {
+    const updateChunkSize = () => {
+      setChunkSize(
+        window.innerWidth < MOBILE_BREAKPOINT ? MOBILE_CHUNK : DESKTOP_CHUNK
+      );
+    };
+
+    updateChunkSize();
+    window.addEventListener("resize", updateChunkSize);
+    return () => window.removeEventListener("resize", updateChunkSize);
+  }, []);
+
+  const workSlides = useMemo(() => getWorkSlides(chunkSize), [chunkSize]);
+  const isMobileLayout = chunkSize === MOBILE_CHUNK;
 
   const toggleDescription = (cardKey) => {
     setExpandedCard((current) => (current === cardKey ? null : cardKey));
@@ -25,16 +43,28 @@ const WorkSlider = () => {
 
   return (
     <Swiper
+      key={chunkSize}
+      autoHeight={isMobileLayout}
       spaceBetween={10}
       pagination={{
         clickable: true,
       }}
       modules={[Pagination]}
-      className="h-[320px] w-full sm:h-[520px]"
+      className={
+        isMobileLayout
+          ? "w-full pb-10"
+          : "h-[320px] w-full sm:h-[520px]"
+      }
     >
       {workSlides.slides.map((slide, i) => (
-        <SwiperSlide key={i} className="!h-full">
-          <div className="grid h-full min-h-0 grid-cols-2 grid-rows-2 gap-3 sm:gap-4">
+        <SwiperSlide key={i} className={isMobileLayout ? "!h-auto" : "!h-full"}>
+          <div
+            className={`grid w-full gap-3 sm:gap-4 ${
+              isMobileLayout
+                ? "grid-cols-1"
+                : "h-full min-h-0 grid-cols-2 grid-rows-2"
+            }`}
+          >
             {slide.images.map((image, imageI) => {
               const cardKey = `${i}-${imageI}`;
               const isExpanded = expandedCard === cardKey;
@@ -46,7 +76,9 @@ const WorkSlider = () => {
 
               return (
                 <div
-                  className="flex min-h-0 flex-col overflow-hidden rounded-lg bg-black/40"
+                  className={`flex flex-col overflow-hidden rounded-lg bg-black/40 ${
+                    isMobileLayout ? "w-full" : "min-h-0"
+                  }`}
                   key={imageI}
                 >
                   <div
@@ -70,15 +102,21 @@ const WorkSlider = () => {
                         toggleDescription(cardKey);
                       }
                     }}
-                    className={`group/card relative min-h-0 flex-1 touch-manipulation ${
-                      image.business ? "cursor-pointer" : ""
-                    }`}
+                    className={`group/card relative w-full touch-manipulation ${
+                      isMobileLayout
+                        ? "aspect-[16/10] min-h-[200px]"
+                        : "min-h-0 flex-1"
+                    } ${image.business ? "cursor-pointer" : ""}`}
                   >
                     <Image
                       src={image.path}
                       alt={image.name}
                       fill
-                      sizes="(max-width: 640px) 45vw, 280px"
+                      sizes={
+                        isMobileLayout
+                          ? "100vw"
+                          : "(max-width: 640px) 45vw, 280px"
+                      }
                       className="object-cover"
                       onError={(e) => {
                         if (image.fallbackPath) {
@@ -87,17 +125,16 @@ const WorkSlider = () => {
                       }}
                     />
 
-                    {/* business — hover / tap overlay */}
                     {image.business && (
                       <div
-                        className={`pointer-events-none absolute inset-0 z-40 flex bg-black/92 transition-opacity duration-300 backdrop-blur-sm max-md:items-start max-md:justify-start max-md:px-3.5 max-md:pt-3 max-md:pb-4 md:items-center md:justify-center md:px-5 md:py-8 ${
+                        className={`pointer-events-none absolute inset-0 z-40 flex bg-black/92 transition-opacity duration-300 backdrop-blur-sm max-md:items-start max-md:justify-start max-md:px-4 max-md:pt-3 max-md:pb-4 md:items-center md:justify-center md:px-5 md:py-8 ${
                           isExpanded
                             ? "opacity-100"
                             : "opacity-0 [@media(hover:hover)]:group-hover/card:opacity-100"
                         }`}
                       >
                         <p
-                          className={`max-h-full w-full overflow-y-auto overscroll-contain font-medium text-white max-md:text-left max-md:text-[10px] max-md:leading-[1.65] max-md:pr-1 sm:text-xs sm:leading-relaxed md:text-center ${
+                          className={`max-h-full w-full overflow-y-auto overscroll-contain font-medium text-white max-md:text-left max-md:text-xs max-md:leading-[1.65] sm:text-xs sm:leading-relaxed md:text-center ${
                             isExpanded ? "max-md:line-clamp-none" : ""
                           }`}
                         >
@@ -106,22 +143,20 @@ const WorkSlider = () => {
                       </div>
                     )}
 
-                    {/* project name — top left */}
                     <div
-                      className={`absolute top-0 left-0 z-30 max-w-[70%] rounded-br-md bg-black/80 px-2.5 py-2 backdrop-blur-sm transition-opacity duration-300 ${
+                      className={`absolute top-0 left-0 z-30 max-w-[60%] rounded-br-md bg-black/80 px-3 py-2 backdrop-blur-sm transition-opacity duration-300 sm:max-w-[70%] ${
                         hideChrome
                           ? "max-md:invisible max-md:opacity-0"
                           : "opacity-100 [@media(hover:hover)]:group-hover/card:opacity-0"
                       }`}
                     >
-                      <p className="text-left text-[10px] font-bold leading-tight text-white sm:text-xs">
+                      <p className="text-left text-xs font-bold leading-tight text-white sm:text-sm">
                         {image.name}
                       </p>
                     </div>
 
-                    {/* links — always tappable; stay above hover overlay */}
                     <div
-                      className={`absolute top-2 right-2 z-50 flex max-w-[48%] flex-row flex-wrap justify-end gap-1 ${
+                      className={`absolute top-2 right-2 z-50 flex max-w-[55%] flex-row flex-wrap justify-end gap-1.5 sm:max-w-[48%] ${
                         hideChrome
                           ? "pointer-events-none max-md:invisible max-md:opacity-0"
                           : "opacity-100"
@@ -191,13 +226,14 @@ const WorkSlider = () => {
                     </div>
                   </div>
 
-                  {/* stack / label — fixed strip below image; hide on mobile when description is open */}
                   <div
-                    className={`shrink-0 border-t border-white/10 bg-black/90 px-2.5 py-2 backdrop-blur-sm transition-opacity duration-300 ${
-                      isExpanded ? "max-md:invisible max-md:h-0 max-md:overflow-hidden max-md:border-0 max-md:py-0" : ""
+                    className={`shrink-0 border-t border-white/10 bg-black/90 px-3 py-2.5 backdrop-blur-sm transition-opacity duration-300 ${
+                      isExpanded
+                        ? "max-md:invisible max-md:h-0 max-md:overflow-hidden max-md:border-0 max-md:py-0"
+                        : ""
                     }`}
                   >
-                    <p className="line-clamp-2 text-left text-[9px] font-medium leading-snug text-white/90 sm:text-[10px]">
+                    <p className="line-clamp-3 text-left text-[11px] font-medium leading-snug text-white/90 sm:line-clamp-2 sm:text-xs">
                       {bottomLabel || "Portfolio project"}
                     </p>
                   </div>

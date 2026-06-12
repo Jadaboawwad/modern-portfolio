@@ -40,7 +40,7 @@ const Work = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="flex w-full max-w-[560px] justify-center pr-12 sm:max-w-[600px] sm:pr-14 xl:max-w-[65%] xl:pr-0"
+            className="w-full xl:max-w-[65%]"
           >
             <WorkSlider />
           </motion.div>
