@@ -20,12 +20,14 @@ Dark purple/navy tech aesthetic with red/orange accent glow, clean modern compos
 - **Blinx** → `work/work-blinx.png`
   - Prompt: digital storytelling media app UI, video player + cast-to-TV + short-form story cards, Gen Z streaming, (no text, no logos), dark purple/navy with red/orange accents
 
+- **4th Tech** → `work/work-4th-tech.png`
+  - Prompt: robotics and AI R&D company website UI, research lab + training workshop panels + ML neural nodes + robotics arm + innovation motifs, cutting-edge technology services, (no text, no logos), dark purple/navy with red/orange accents
+
 - **ReStaged** → `work/work-restaged.png`
   - Prompt: furniture sharing marketplace app UI, rent/sell cards + search filters + sofa/chair silhouettes, sustainable staging, (no text, no logos), dark purple/navy with red/orange accents
 
 - **Disease Discovery** → `work/work-disease-discovery.png`
   - Prompt: abstract medical AI dashboard, DNA helix + heartbeat line + classification chart, healthcare analytics interface, (no text, no logos), dark purple/navy with red/orange accents
-
 - **People Thinks** → `work/work-people-thinks.png`
   - Prompt: NLP sentiment analysis visualization, chat bubbles as abstract shapes, word-vector cloud, emotion heatmap, (no text, no logos), dark purple/navy with red/orange accents
 

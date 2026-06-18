@@ -40,6 +40,16 @@ const workProjects = [
     fallbackPath: "/thumb3.jpg",
   },
   {
+    name: "4th Tech",
+    business:
+      "Robotics and AI company site—showcases R&D, training workshops, and technology services.",
+    stack: "React · TypeScript · GraphQL · Atomic Design",
+    link: "https://4thtechjo.com/",
+    github: "https://github.com/4th-Tech/4th-tech-web.git",
+    path: "/work/work-4th-tech.png",
+    fallbackPath: "/thumb1.jpg",
+  },
+  {
     name: "ReStaged",
     business:
       "Furniture marketplace to rent or buy pre-owned pieces for home staging and moves.",
