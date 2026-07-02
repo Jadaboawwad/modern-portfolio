@@ -122,7 +122,6 @@ const codeLanguagesList = [
   "TypeScript",
   "JavaScript",
   "Python",
-  "CSS",
 ];
 
 //  data
@@ -175,8 +174,8 @@ export const aboutData = [
         title: "All‑Time Coding (WakaTime)",
         stage: "5,124 hrs 1 min total",
         details: [
-          "Top languages: Dart 40.75%, TypeScript 28.44%, Python 8.67%, JavaScript 6.52%, CSS 3.03%",
-          "Also: JSON 2.60%, YAML 1.90%, Bash 1.68%, Markdown 1.06%",
+          "Top languages: Dart 40.75%, TypeScript 28.44%, Python 8.67%, JavaScript 6.52%",
+          "Also: CSS 3.03%, JSON 2.60%, YAML 1.90%, Bash 1.68%, Markdown 1.06%",
         ],
       },
     ],
