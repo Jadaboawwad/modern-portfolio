@@ -284,6 +284,10 @@ export const aboutData = [
         stage: "May 2022",
       },
       {
+        title: "The Ultimate React Native Series: Advanced Concepts — Code With Mosh",
+        stage: "May 2022",
+      },
+      {
         title: "JavaScript Core Certification — SoloLearn",
         stage: "Feb 2022",
       },
@@ -330,6 +334,10 @@ export const aboutData = [
       {
         title: "Life Skills Training (32 Hours) — Wadi Al-Seer Training College",
         stage: "May 2016",
+      },
+      {
+        title: "Workshops Feature — WeFix (OMS)",
+        stage: "2026",
       },
     ],
   },
@@ -405,7 +413,7 @@ export const aboutData = [
   },
 ];
 
-const certificationCount = 40;
+const certificationCount = 42;
 
 const About = () => {
   const [index, setIndex] = useState(0);
