@@ -336,8 +336,8 @@ export const aboutData = [
         stage: "May 2016",
       },
       {
-        title: "Workshops Feature — WeFix (OMS)",
-        stage: "2026",
+        title: "Professional Standards Workshop for PCB — CAVTJ",
+        stage: "Jul 2026",
       },
     ],
   },
