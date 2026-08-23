@@ -184,6 +184,10 @@ export const aboutData = [
     title: "certificates",
     info: [
       {
+        title: "Professional Standards Workshop for PCB — CAVTJ",
+        stage: "Jul 2026",
+      },
+      {
         title: "Purple Certification: Design Verification Track",
         stage: "Mar 2025",
       },
@@ -208,10 +212,6 @@ export const aboutData = [
         stage: "Mar 2025",
       },
       {
-        title: "Purple Certification: Very Deep Submicron (VDSM) Fundamentals",
-        stage: "Jan 2025",
-      },
-      {
         title: "SystemVerilog Refresher",
         stage: "Feb 2025",
       },
@@ -222,6 +222,10 @@ export const aboutData = [
       {
         title: "Verilog Refresher",
         stage: "Feb 2025",
+      },
+      {
+        title: "Purple Certification: Very Deep Submicron (VDSM) Fundamentals",
+        stage: "Jan 2025",
       },
       {
         title: "Design Verification: Comprehensive",
@@ -242,22 +246,6 @@ export const aboutData = [
       {
         title: "Purple Certification: CMOS Fundamentals",
         stage: "Jan 2025",
-      },
-      {
-        title: "Code Fellows: Level 102 — Fundamentals",
-        stage: "Jun 2021",
-      },
-      {
-        title: "Code Fellows: Level 201 — Foundation of Software Development",
-        stage: "Jun 2021",
-      },
-      {
-        title: "Code Fellows: Level 301 — Intermediate Software Development",
-        stage: "2021",
-      },
-      {
-        title: "Code Fellows: Level 401 — Advanced Software Development",
-        stage: "Dec 2021",
       },
       {
         title: "Applied Machine Learning — IEEE BAU",
@@ -292,12 +280,28 @@ export const aboutData = [
         stage: "Feb 2022",
       },
       {
+        title: "Code Fellows: Level 401 — Advanced Software Development",
+        stage: "Dec 2021",
+      },
+      {
+        title: "Code Fellows: Level 301 — Intermediate Software Development",
+        stage: "2021",
+      },
+      {
         title: "PLC Advanced & SCADA WINCC Runtime using TIA Portal Software for Engineers",
         stage: "Oct 2021",
       },
       {
         title: "Python Core Certification — SoloLearn",
         stage: "Oct 2021",
+      },
+      {
+        title: "Code Fellows: Level 102 — Fundamentals",
+        stage: "Jun 2021",
+      },
+      {
+        title: "Code Fellows: Level 201 — Foundation of Software Development",
+        stage: "Jun 2021",
       },
       {
         title: "Machine Learning Training (ACBPT) — Codesk Solutions",
@@ -334,10 +338,6 @@ export const aboutData = [
       {
         title: "Life Skills Training (32 Hours) — Wadi Al-Seer Training College",
         stage: "May 2016",
-      },
-      {
-        title: "Professional Standards Workshop for PCB — CAVTJ",
-        stage: "Jul 2026",
       },
     ],
   },
@@ -413,7 +413,9 @@ export const aboutData = [
   },
 ];
 
-const certificationCount = 42;
+const certificationCount =
+  aboutData.find((item) => item.title === "certificates").info.length +
+  aboutData.find((item) => item.title === "education").info.length;
 
 const About = () => {
   const [index, setIndex] = useState(0);
