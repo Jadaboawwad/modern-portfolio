@@ -284,16 +284,16 @@ export const aboutData = [
         stage: "Dec 2021",
       },
       {
-        title: "Code Fellows: Level 301 — Intermediate Software Development",
-        stage: "2021",
-      },
-      {
         title: "PLC Advanced & SCADA WINCC Runtime using TIA Portal Software for Engineers",
         stage: "Oct 2021",
       },
       {
         title: "Python Core Certification — SoloLearn",
         stage: "Oct 2021",
+      },
+      {
+        title: "Code Fellows: Level 301 — Intermediate Software Development",
+        stage: "Sep 2021",
       },
       {
         title: "Code Fellows: Level 102 — Fundamentals",
