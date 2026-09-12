@@ -152,10 +152,38 @@ async function transformResponse(response, requestUrl) {
   return response;
 }
 
-export default async (request) => {
+/** Best-effort visit logging — must never break the proxy. */
+function logRequest(kind, request, context, extra = {}) {
+  try {
+    const geo = context.geo || {};
+    console.log(
+      JSON.stringify({
+        kind,
+        time: new Date().toISOString(),
+        ip: context.ip,
+        country: geo.country?.name,
+        countryCode: geo.country?.code,
+        region: geo.subdivision?.name,
+        city: geo.city,
+        timezone: geo.timezone,
+        userAgent: request.headers.get("user-agent") || "",
+        referrer: request.headers.get("referer") || "",
+        ...extra,
+      })
+    );
+  } catch {
+    // ignore — logging must never break the actual request
+  }
+}
+
+export default async (request, context) => {
   const url = new URL(request.url);
   const target = buildUpstreamUrl(url);
   const headers = buildUpstreamHeaders(request, url);
+
+  if (request.method === "GET" && upstreamPath(url.pathname) === "/") {
+    logRequest("chat_tab_open", request, context);
+  }
 
   const response = await fetch(target.toString(), {
     method: request.method,

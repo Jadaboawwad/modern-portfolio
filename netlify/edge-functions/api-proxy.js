@@ -10,7 +10,31 @@ const CORS = {
   "Access-Control-Allow-Headers": "Content-Type, Accept",
 };
 
-export default async (request) => {
+/** Best-effort visit/message logging — must never break the proxy. */
+function logRequest(kind, request, context, extra = {}) {
+  try {
+    const geo = context.geo || {};
+    console.log(
+      JSON.stringify({
+        kind,
+        time: new Date().toISOString(),
+        ip: context.ip,
+        country: geo.country?.name,
+        countryCode: geo.country?.code,
+        region: geo.subdivision?.name,
+        city: geo.city,
+        timezone: geo.timezone,
+        userAgent: request.headers.get("user-agent") || "",
+        referrer: request.headers.get("referer") || "",
+        ...extra,
+      })
+    );
+  } catch {
+    // ignore — logging must never break the actual request
+  }
+}
+
+export default async (request, context) => {
   if (request.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: CORS });
   }
@@ -37,6 +61,13 @@ export default async (request) => {
         const payload = JSON.parse(raw);
         payload.stream = true;
         body = JSON.stringify(payload);
+        logRequest("chat_message", request, context, {
+          question:
+            typeof payload.question === "string"
+              ? payload.question.slice(0, 500)
+              : undefined,
+          language: payload.language,
+        });
       } catch {
         body = raw;
       }
@@ -47,6 +78,8 @@ export default async (request) => {
 
   if (isChatPost) {
     headers.set("Accept", "text/event-stream");
+  } else if (path.replace(/\/$/, "") === "/api/health") {
+    logRequest("chat_widget_open", request, context);
   }
 
   const controller = new AbortController();
