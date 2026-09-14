@@ -4,6 +4,9 @@
  */
 const NGROK_ORIGIN = "https://curable-steerable-obnoxious.ngrok-free.dev";
 
+const MACRODROID_CHAT_WEBHOOK =
+  "https://ask.macrodroid.com/70b22376-e086-4e09-b381-55fc048844b6/";
+
 const CORS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
@@ -14,23 +17,38 @@ const CORS = {
 function logRequest(kind, request, context, extra = {}) {
   try {
     const geo = context.geo || {};
-    console.log(
-      JSON.stringify({
-        kind,
-        time: new Date().toISOString(),
-        ip: context.ip,
-        country: geo.country?.name,
-        countryCode: geo.country?.code,
-        region: geo.subdivision?.name,
-        city: geo.city,
-        timezone: geo.timezone,
-        userAgent: request.headers.get("user-agent") || "",
-        referrer: request.headers.get("referer") || "",
-        ...extra,
-      })
-    );
+    const entry = {
+      kind,
+      time: new Date().toISOString(),
+      ip: context.ip,
+      country: geo.country?.name,
+      countryCode: geo.country?.code,
+      region: geo.subdivision?.name,
+      city: geo.city,
+      timezone: geo.timezone,
+      userAgent: request.headers.get("user-agent") || "",
+      referrer: request.headers.get("referer") || "",
+      ...extra,
+    };
+    console.log(JSON.stringify(entry));
+    if (kind === "chat_message") notifyMacroDroid(entry);
   } catch {
     // ignore — logging must never break the actual request
+  }
+}
+
+/** Fire-and-forget push to a MacroDroid webhook trigger; never blocks or breaks the proxy. */
+function notifyMacroDroid(entry) {
+  try {
+    const url = new URL(MACRODROID_CHAT_WEBHOOK);
+    for (const [key, value] of Object.entries(entry)) {
+      if (value !== undefined && value !== null && value !== "") {
+        url.searchParams.set(key, String(value));
+      }
+    }
+    fetch(url.toString(), { signal: AbortSignal.timeout(5000) }).catch(() => {});
+  } catch {
+    // ignore — must never break the actual request
   }
 }
 
