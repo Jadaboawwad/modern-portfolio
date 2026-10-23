@@ -1,4 +1,4 @@
-const NGROK_ORIGIN = "https://curable-steerable-obnoxious.ngrok-free.dev";
+const NGROK_ORIGIN = "https://smartly-cryptic-smilingly.ngrok-free.dev";
 const NGROK_WS_ORIGIN = NGROK_ORIGIN.replace(/^https/, "wss");
 const PORTFOLIO_ORIGIN = "https://jehadabuawwad.com";
 

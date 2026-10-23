@@ -2,7 +2,7 @@
  * Netlify Edge — proxy /rag-api/* → ngrok gateway /api/*
  * Chat uses SSE streaming so Netlify keeps the connection open (>40s processing).
  */
-const NGROK_ORIGIN = "https://curable-steerable-obnoxious.ngrok-free.dev";
+const NGROK_ORIGIN = "https://smartly-cryptic-smilingly.ngrok-free.dev";
 
 const MACRODROID_CHAT_WEBHOOK =
   "https://ask.macrodroid.com/70b22376-e086-4e09-b381-55fc048844b6/";
