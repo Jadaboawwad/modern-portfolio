@@ -4,6 +4,7 @@ import {
   RiGithubLine,
   RiLinkedinLine,
   RiFileTextLine,
+  RiCodeSSlashLine,
 } from "react-icons/ri";
 
 export const socialData = [
@@ -21,6 +22,11 @@ export const socialData = [
     name: "CV",
     link: "https://drive.google.com/file/d/1rPgJzqRG_WPK88mK4jbskuYKMscXGC_x/view?usp=sharing",
     Icon: RiFileTextLine,
+  },
+  {
+    name: "Engineering Resume",
+    link: "https://drive.google.com/file/d/10NvlOUfeRO-PE5laTyLV7MmRz6qpYFsN/view?usp=sharing",
+    Icon: RiCodeSSlashLine,
   },
 ];
 
