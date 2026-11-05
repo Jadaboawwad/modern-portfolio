@@ -56,7 +56,7 @@ const MechaProject = ({ project, index }) => {
 
 const MechaPage = () => {
   return (
-    <div className="h-full bg-primary/30 overflow-y-auto overflow-x-hidden scrollbar-hide">
+    <div className="min-h-full bg-primary/30 overflow-x-hidden scrollbar-hide max-xl:overflow-y-auto xl:h-screen xl:overflow-y-auto">
       <Circles />
       <div className="container mx-auto px-4 py-32 xl:py-36 min-h-full">
         {/* hero */}
