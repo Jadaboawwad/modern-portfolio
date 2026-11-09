@@ -7,7 +7,7 @@ import {
   sendPortfolioQuestion,
   warmupRagApi,
 } from "../lib/portfolioChat";
-import { speakWithAvatar, transcribeAudio } from "../lib/avatarChat";
+import { speakWithAvatarStreaming, transcribeAudio } from "../lib/avatarChat";
 import { renderBidiContent } from "../lib/formatBidiText";
 import AvatarTalker from "./AvatarTalker";
 
@@ -39,7 +39,8 @@ const PortfolioChatPanel = () => {
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [retrying, setRetrying] = useState(false);
-  const [avatarVideoUrl, setAvatarVideoUrl] = useState(null);
+  const [avatarQueue, setAvatarQueue] = useState([]);
+  const [avatarStreamDone, setAvatarStreamDone] = useState(true);
   const [avatarSpeaking, setAvatarSpeaking] = useState(false);
   const [recording, setRecording] = useState(false);
   const [transcribing, setTranscribing] = useState(false);
@@ -117,12 +118,25 @@ const PortfolioChatPanel = () => {
 
       // Best-effort: never let the avatar pipeline (separate local service,
       // shares the GPU with the RAG model) block or break the text reply.
+      // Streaming: chunks arrive over the whole render, not all at once, so
+      // reset the queue for this new answer and let AvatarTalker start
+      // playing chunk 0 as soon as it lands instead of waiting for the
+      // full clip (which for a long answer can take minutes).
+      setAvatarQueue([]);
+      setAvatarStreamDone(false);
       setAvatarSpeaking(true);
-      speakWithAvatar(answer)
-        .then((videoUrl) => {
-          if (videoUrl) setAvatarVideoUrl(videoUrl);
-        })
-        .finally(() => setAvatarSpeaking(false));
+      speakWithAvatarStreaming(answer, {
+        onChunk: (videoUrl, isLast) => {
+          setAvatarQueue((current) => [...current, videoUrl]);
+          if (isLast) setAvatarStreamDone(true);
+        },
+      }).finally(() => {
+        setAvatarSpeaking(false);
+        // Safety net: if the stream ended without an explicit is_last
+        // chunk (e.g. it errored out mid-stream), make sure AvatarTalker
+        // doesn't stay stuck "waiting" for a chunk that's never coming.
+        setAvatarStreamDone(true);
+      });
     } catch (error) {
       const message =
         error instanceof Error && error.message
@@ -254,7 +268,7 @@ const PortfolioChatPanel = () => {
       </div>
 
       <div className="flex shrink-0 items-center justify-center border-b border-white/10 bg-black/20 py-5">
-        <AvatarTalker videoUrl={avatarVideoUrl} speaking={avatarSpeaking} />
+        <AvatarTalker queue={avatarQueue} streamDone={avatarStreamDone} speaking={avatarSpeaking} />
       </div>
 
       <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-3 py-4 scrollbar-thin scrollbar-thumb-white/20">
