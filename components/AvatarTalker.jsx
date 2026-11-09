@@ -161,7 +161,18 @@ const AvatarTalker = ({
         <video
           key={slot}
           ref={slotRefs[slot]}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out ${
+          // will-change hints the browser to promote this to its own
+          // compositor layer ahead of time, instead of doing it reactively
+          // when the opacity transition starts -- measured (via sampled
+          // currentTime across a chunk swap) that compositing two
+          // overlapping actively-decoding <video> elements during the fade
+          // was stalling the incoming chunk's actual decode/playback to
+          // roughly half real-time for ~400-450ms, which is what read as
+          // "stops playing" -- a longer fade duration just gave that same
+          // stall more visible runway. Shorter duration + this hint trades
+          // some of the crossfade smoothness back for less stall.
+          style={{ willChange: "opacity" }}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ease-out ${
             showVideo && slot === frontSlot ? "opacity-100" : "opacity-0"
           }`}
           onEnded={slot === frontSlot ? handleEnded : undefined}
