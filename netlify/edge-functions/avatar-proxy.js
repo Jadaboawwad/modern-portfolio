@@ -30,10 +30,12 @@ export default async (request) => {
   headers.set("ngrok-skip-browser-warning", "1");
   headers.delete("content-length");
 
+  // Must keep the raw bytes — /api/transcribe sends multipart audio
+  // (webm/wav). request.text() corrupts that body and Whisper returns 502.
   const body =
     request.method === "GET" || request.method === "HEAD"
       ? undefined
-      : await request.text();
+      : await request.arrayBuffer();
 
   // Avatar generation (TTS + lip-sync) can take tens of seconds.
   const controller = new AbortController();
