@@ -61,6 +61,12 @@ const AvatarTalker = ({
   // True once we've kicked off the master audio for this stream (paired
   // with the first video play) so we don't restart it on every swap.
   const masterAudioStarted = useRef(false);
+  // Set when this stream finishes naturally. Without this, finishing sets
+  // playIndex back to -1 while queue still holds every chunk URL, and the
+  // "start when queue has items" effect immediately restarts from chunk 0
+  // (infinite loop). Cleared when the parent resets queue to [] for a new
+  // question.
+  const playbackComplete = useRef(false);
 
   const [frontSlot, setFrontSlot] = useState(0);
   const [playIndex, setPlayIndex] = useState(-1);
@@ -134,6 +140,16 @@ const AvatarTalker = ({
     masterAudioStarted.current = false;
   };
 
+  const finishPlayback = () => {
+    playbackComplete.current = true;
+    slotRefs[0].current?.pause();
+    slotRefs[1].current?.pause();
+    stopMasterAudio();
+    setShowVideo(false);
+    setPlayIndex(-1);
+    setWaiting(false);
+  };
+
   // Load (but don't yet play) the master wav as soon as it arrives so the
   // first video play can start audio with minimal delay.
   useEffect(() => {
@@ -158,6 +174,7 @@ const AvatarTalker = ({
       slotRefs[0].current?.pause();
       slotRefs[1].current?.pause();
       stopMasterAudio();
+      playbackComplete.current = false;
       setPlayIndex(-1);
       setFrontSlot(0);
       setWaiting(false);
@@ -182,9 +199,10 @@ const AvatarTalker = ({
   }, [waiting, showVideo, useMasterAudio]);
 
   // Start playback as soon as the first chunk arrives, and resume once a
-  // chunk we were waiting on finally arrives.
+  // chunk we were waiting on finally arrives. Skip if this stream already
+  // finished -- otherwise ending (playIndex=-1 with a full queue) loops.
   useEffect(() => {
-    if (playIndex === -1 && queue.length > 0) {
+    if (playIndex === -1 && queue.length > 0 && !playbackComplete.current) {
       setPlayIndex(0);
       setShowVideo(true);
       setWaiting(false);
@@ -353,20 +371,15 @@ const AvatarTalker = ({
       // The waiting effect pauses master audio; resume effect restarts it.
       setWaiting(true);
     } else {
-      stopMasterAudio();
-      setShowVideo(false);
-      setPlayIndex(-1);
+      finishPlayback();
     }
   };
 
   const handleAudioEnded = () => {
-    // Master track finished -- if video is somehow still going, tear down.
+    // Master track finished -- tear down even if the last video frame is
+    // still showing; marks complete so we don't restart from chunk 0.
     if (streamDoneRef.current) {
-      slotRefs[0].current?.pause();
-      slotRefs[1].current?.pause();
-      setShowVideo(false);
-      setPlayIndex(-1);
-      masterAudioStarted.current = false;
+      finishPlayback();
     }
   };
 
