@@ -40,6 +40,8 @@ const PortfolioChatPanel = () => {
   const [sending, setSending] = useState(false);
   const [retrying, setRetrying] = useState(false);
   const [avatarQueue, setAvatarQueue] = useState([]);
+  const [avatarAudioUrl, setAvatarAudioUrl] = useState(null);
+  const [avatarChunkSeconds, setAvatarChunkSeconds] = useState(null);
   const [avatarStreamDone, setAvatarStreamDone] = useState(true);
   const [avatarSpeaking, setAvatarSpeaking] = useState(false);
   const [recording, setRecording] = useState(false);
@@ -123,9 +125,15 @@ const PortfolioChatPanel = () => {
       // playing chunk 0 as soon as it lands instead of waiting for the
       // full clip (which for a long answer can take minutes).
       setAvatarQueue([]);
+      setAvatarAudioUrl(null);
+      setAvatarChunkSeconds(null);
       setAvatarStreamDone(false);
       setAvatarSpeaking(true);
       speakWithAvatarStreaming(answer, {
+        onAudio: (audioUrl, chunkSeconds) => {
+          setAvatarAudioUrl(audioUrl);
+          if (chunkSeconds) setAvatarChunkSeconds(chunkSeconds);
+        },
         onChunk: (videoUrl, isLast) => {
           setAvatarQueue((current) => [...current, videoUrl]);
           if (isLast) setAvatarStreamDone(true);
@@ -268,7 +276,13 @@ const PortfolioChatPanel = () => {
       </div>
 
       <div className="flex shrink-0 items-center justify-center border-b border-white/10 bg-black/20 py-5">
-        <AvatarTalker queue={avatarQueue} streamDone={avatarStreamDone} speaking={avatarSpeaking} />
+        <AvatarTalker
+          queue={avatarQueue}
+          audioUrl={avatarAudioUrl}
+          chunkSeconds={avatarChunkSeconds}
+          streamDone={avatarStreamDone}
+          speaking={avatarSpeaking}
+        />
       </div>
 
       <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-3 py-4 scrollbar-thin scrollbar-thumb-white/20">
