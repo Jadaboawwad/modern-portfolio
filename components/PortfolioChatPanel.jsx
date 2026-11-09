@@ -39,9 +39,9 @@ const PortfolioChatPanel = () => {
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [retrying, setRetrying] = useState(false);
+  // queue items: { url, chunkStart, chunkDuration, chunkIndex }
   const [avatarQueue, setAvatarQueue] = useState([]);
   const [avatarAudioUrl, setAvatarAudioUrl] = useState(null);
-  const [avatarChunkSeconds, setAvatarChunkSeconds] = useState(null);
   const [avatarStreamDone, setAvatarStreamDone] = useState(true);
   const [avatarSpeaking, setAvatarSpeaking] = useState(false);
   const [recording, setRecording] = useState(false);
@@ -126,16 +126,22 @@ const PortfolioChatPanel = () => {
       // full clip (which for a long answer can take minutes).
       setAvatarQueue([]);
       setAvatarAudioUrl(null);
-      setAvatarChunkSeconds(null);
       setAvatarStreamDone(false);
       setAvatarSpeaking(true);
       speakWithAvatarStreaming(answer, {
-        onAudio: (audioUrl, chunkSeconds) => {
+        onAudio: (audioUrl) => {
           setAvatarAudioUrl(audioUrl);
-          if (chunkSeconds) setAvatarChunkSeconds(chunkSeconds);
         },
-        onChunk: (videoUrl, isLast) => {
-          setAvatarQueue((current) => [...current, videoUrl]);
+        onChunk: (videoUrl, isLast, meta = {}) => {
+          setAvatarQueue((current) => [
+            ...current,
+            {
+              url: videoUrl,
+              chunkIndex: meta.chunkIndex ?? current.length,
+              chunkStart: meta.chunkStart ?? 0,
+              chunkDuration: meta.chunkDuration,
+            },
+          ]);
           if (isLast) setAvatarStreamDone(true);
         },
       }).finally(() => {
@@ -279,7 +285,6 @@ const PortfolioChatPanel = () => {
         <AvatarTalker
           queue={avatarQueue}
           audioUrl={avatarAudioUrl}
-          chunkSeconds={avatarChunkSeconds}
           streamDone={avatarStreamDone}
           speaking={avatarSpeaking}
           size="h-48 w-48 sm:h-48 sm:w-48 md:h-56 md:w-56"
