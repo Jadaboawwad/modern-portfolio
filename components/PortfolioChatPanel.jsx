@@ -200,7 +200,7 @@ const PortfolioChatPanel = () => {
         if (blob.size === 0) return;
 
         setTranscribing(true);
-        const text = await transcribeAudio(blob);
+        const text = await transcribeAudio(blob, language);
         setTranscribing(false);
 
         if (text) {
