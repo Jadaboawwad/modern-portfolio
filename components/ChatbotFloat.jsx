@@ -57,7 +57,7 @@ const ChatbotFloat = ({ inline = false }) => {
               role="dialog"
               aria-modal="true"
               aria-label="AI chat assistant"
-              className="fixed z-[110] flex w-full max-w-full flex-col overflow-hidden border border-white/10 bg-secondary shadow-2xl inset-x-2 top-[2.5dvh] h-[95dvh] rounded-2xl md:inset-x-auto md:top-auto md:bottom-28 md:right-8 md:h-[min(560px,calc(100vh-8rem))] md:w-[min(420px,calc(100vw-2rem))] md:max-w-[420px] xl:right-[calc(2%+6rem)] xl:h-[min(800px,calc(100vh-4rem))] xl:w-[min(640px,calc(100vw-14rem))] xl:max-w-[640px]"
+              className="fixed z-[110] flex w-auto max-w-full flex-col overflow-hidden border border-white/10 bg-secondary shadow-2xl inset-x-2 top-[2.5dvh] bottom-[2.5dvh] rounded-2xl md:inset-x-auto md:top-auto md:bottom-28 md:right-8 md:h-[min(560px,calc(100vh-8rem))] md:w-[min(420px,calc(100vw-2rem))] md:max-w-[420px] xl:right-[calc(2%+6rem)] xl:h-[min(800px,calc(100vh-4rem))] xl:w-[min(640px,calc(100vw-14rem))] xl:max-w-[640px]"
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 24 }}
