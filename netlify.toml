@@ -9,6 +9,7 @@
   NEXT_PUBLIC_CHATBOT_URL = "https://jehadabuawwad.com/chat"
   # Same-origin proxy — avoids CORS (direct ngrok from browser is blocked on free tier).
   NEXT_PUBLIC_RAG_API_URL = "/rag-api"
+  NEXT_PUBLIC_AVATAR_API_URL = "/avatar-api"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
@@ -32,3 +33,11 @@
 [[edge_functions]]
   path = "/rag-api/*"
   function = "api-proxy"
+
+[[edge_functions]]
+  path = "/avatar-api"
+  function = "avatar-proxy"
+
+[[edge_functions]]
+  path = "/avatar-api/*"
+  function = "avatar-proxy"

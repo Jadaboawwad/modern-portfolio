@@ -7,7 +7,9 @@ import {
   sendPortfolioQuestion,
   warmupRagApi,
 } from "../lib/portfolioChat";
+import { speakWithAvatar } from "../lib/avatarChat";
 import { renderBidiContent } from "../lib/formatBidiText";
+import AvatarTalker from "./AvatarTalker";
 
 function MessageBubble({ role, content, language }) {
   const isUser = role === "user";
@@ -37,6 +39,8 @@ const PortfolioChatPanel = () => {
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [retrying, setRetrying] = useState(false);
+  const [avatarVideoUrl, setAvatarVideoUrl] = useState(null);
+  const [avatarSpeaking, setAvatarSpeaking] = useState(false);
   const bottomRef = useRef(null);
   const strings = UI[language];
 
@@ -97,6 +101,15 @@ const PortfolioChatPanel = () => {
         { role: "assistant", content: answer, language: replyLang },
       ]);
       setReady(true);
+
+      // Best-effort: never let the avatar pipeline (separate local service,
+      // shares the GPU with the RAG model) block or break the text reply.
+      setAvatarSpeaking(true);
+      speakWithAvatar(answer)
+        .then((videoUrl) => {
+          if (videoUrl) setAvatarVideoUrl(videoUrl);
+        })
+        .finally(() => setAvatarSpeaking(false));
     } catch (error) {
       const message =
         error instanceof Error && error.message
@@ -131,6 +144,7 @@ const PortfolioChatPanel = () => {
   return (
     <div className="flex h-full min-h-0 min-w-0 flex-col bg-primary">
       <div className="flex shrink-0 items-center justify-end gap-2 border-b border-white/10 px-3 py-2">
+        <div className="flex items-center gap-2">
         <button
           type="button"
           onClick={() => switchLanguage("en")}
@@ -153,6 +167,11 @@ const PortfolioChatPanel = () => {
         >
           {strings.langAr}
         </button>
+        </div>
+      </div>
+
+      <div className="flex shrink-0 items-center justify-center border-b border-white/10 bg-black/20 py-5">
+        <AvatarTalker videoUrl={avatarVideoUrl} speaking={avatarSpeaking} />
       </div>
 
       <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-3 py-4 scrollbar-thin scrollbar-thumb-white/20">
