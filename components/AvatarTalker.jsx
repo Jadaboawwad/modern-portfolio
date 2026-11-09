@@ -170,6 +170,18 @@ const AvatarTalker = ({
     }
   }, [queue.length, playIndex, waiting, streamDone, minBufferChunks]);
 
+  // If the stream ends while we're holding the last frame and master audio
+  // already finished (or never started), tear down -- otherwise waiting can
+  // stick after panel finally flips streamDone.
+  useEffect(() => {
+    if (!waiting || !streamDone || playbackComplete.current) return;
+    const audio = audioRef.current;
+    if (!useMasterAudio || !audio || audio.ended || audio.paused) {
+      finishPlayback();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [waiting, streamDone, useMasterAudio]);
+
   // Drive the front slot for the current playIndex.
   useEffect(() => {
     if (playIndex === -1 || playIndex >= queue.length) return;
