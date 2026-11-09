@@ -57,27 +57,27 @@ const ChatbotFloat = ({ inline = false }) => {
               role="dialog"
               aria-modal="true"
               aria-label="AI chat assistant"
-              className="fixed z-[110] flex w-full max-w-full flex-col overflow-hidden border border-white/10 bg-secondary shadow-2xl inset-x-0 bottom-[5.5rem] h-[min(calc(100dvh-7rem),85dvh)] rounded-t-2xl md:inset-x-auto md:bottom-28 md:right-8 md:h-[min(560px,calc(100vh-8rem))] md:w-[min(420px,calc(100vw-2rem))] md:max-w-[420px] md:rounded-2xl xl:right-[calc(2%+6rem)] xl:h-[min(800px,calc(100vh-4rem))] xl:w-[min(640px,calc(100vw-14rem))] xl:max-w-[640px]"
+              className="fixed z-[110] flex w-full max-w-full flex-col overflow-hidden border border-white/10 bg-secondary shadow-2xl inset-x-2 top-[2.5dvh] h-[95dvh] rounded-2xl md:inset-x-auto md:top-auto md:bottom-28 md:right-8 md:h-[min(560px,calc(100vh-8rem))] md:w-[min(420px,calc(100vw-2rem))] md:max-w-[420px] xl:right-[calc(2%+6rem)] xl:h-[min(800px,calc(100vh-4rem))] xl:w-[min(640px,calc(100vw-14rem))] xl:max-w-[640px]"
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 24 }}
               transition={{ duration: 0.25 }}
             >
-              <div className="flex shrink-0 flex-col gap-3 border-b border-white/10 bg-black/40 px-4 py-3 sm:flex-row sm:items-start sm:justify-between">
+              <div className="flex shrink-0 items-center justify-between gap-2 border-b border-white/10 bg-black/40 px-3 py-1.5 md:gap-3 md:px-4 md:py-3">
                 <div className="min-w-0 flex-1">
-                  <p className="text-base font-semibold text-white md:text-lg">
+                  <p className="text-sm font-semibold text-white md:text-lg">
                     Portfolio Assistant
                   </p>
-                  <p className="text-sm text-white/60 md:text-base">
+                  <p className="hidden text-sm text-white/60 md:block md:text-base">
                     Ask about my experience, skills, certifications, and background
                   </p>
                 </div>
-                <div className="flex shrink-0 items-center justify-end gap-2 self-end sm:self-auto">
+                <div className="flex shrink-0 items-center justify-end gap-1.5 md:gap-2">
                   <a
                     href={STREAMLIT_TAB_URL}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="text-sm font-medium text-white/70 underline-offset-2 hover:text-white hover:underline"
+                    className="text-xs font-medium text-white/70 underline-offset-2 hover:text-white hover:underline md:text-sm"
                   >
                     Open in tab
                   </a>
@@ -85,9 +85,9 @@ const ChatbotFloat = ({ inline = false }) => {
                     type="button"
                     onClick={() => setOpen(false)}
                     aria-label="Close chat"
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+                    className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:h-9 md:w-9"
                   >
-                    <HiXMark className="text-xl" aria-hidden />
+                    <HiXMark className="text-lg md:text-xl" aria-hidden />
                   </button>
                 </div>
               </div>

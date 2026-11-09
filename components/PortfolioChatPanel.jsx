@@ -248,12 +248,12 @@ const PortfolioChatPanel = () => {
 
   return (
     <div className="flex h-full min-h-0 min-w-0 flex-col bg-primary">
-      <div className="flex shrink-0 items-center justify-end gap-2 border-b border-white/10 px-3 py-2">
-        <div className="flex items-center gap-2">
+      <div className="flex shrink-0 items-center justify-end gap-2 border-b border-white/10 px-3 py-1 md:py-2">
+        <div className="flex items-center gap-1.5 md:gap-2">
         <button
           type="button"
           onClick={() => switchLanguage("en")}
-          className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors ${
+          className={`rounded-full px-2.5 py-1 text-xs font-medium transition-colors md:px-3.5 md:py-1.5 md:text-sm ${
             language === "en"
               ? "bg-accent text-white"
               : "bg-white/10 text-white/70 hover:bg-white/15"
@@ -264,7 +264,7 @@ const PortfolioChatPanel = () => {
         <button
           type="button"
           onClick={() => switchLanguage("ar")}
-          className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors ${
+          className={`rounded-full px-2.5 py-1 text-xs font-medium transition-colors md:px-3.5 md:py-1.5 md:text-sm ${
             language === "ar"
               ? "bg-accent text-white"
               : "bg-white/10 text-white/70 hover:bg-white/15"
@@ -275,17 +275,18 @@ const PortfolioChatPanel = () => {
         </div>
       </div>
 
-      <div className="flex shrink-0 items-center justify-center border-b border-white/10 bg-black/20 py-5">
+      <div className="flex shrink-0 items-center justify-center border-b border-white/10 bg-black/20 py-2 md:py-5">
         <AvatarTalker
           queue={avatarQueue}
           audioUrl={avatarAudioUrl}
           chunkSeconds={avatarChunkSeconds}
           streamDone={avatarStreamDone}
           speaking={avatarSpeaking}
+          size="h-48 w-48 sm:h-48 sm:w-48 md:h-56 md:w-56"
         />
       </div>
 
-      <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-3 py-4 scrollbar-thin scrollbar-thumb-white/20">
+      <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-3 py-3 md:py-4 scrollbar-thin scrollbar-thumb-white/20">
         {!ready && (
           <div
             dir={language === "ar" ? "rtl" : "ltr"}
@@ -327,9 +328,9 @@ const PortfolioChatPanel = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="shrink-0 border-t border-white/10 bg-black/30 p-3"
+        className="shrink-0 border-t border-white/10 bg-black/30 p-2 md:p-3"
       >
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1.5 md:gap-2">
           <textarea
             value={input}
             onChange={(event) => setInput(event.target.value)}
@@ -349,7 +350,7 @@ const PortfolioChatPanel = () => {
                   : strings.placeholder
             }
             disabled={sending || recording || transcribing}
-            className="w-full max-h-36 min-h-[5.75rem] flex-1 resize-none overflow-y-auto rounded-xl border border-white/10 bg-white/5 px-3.5 py-3 text-[15px] leading-normal text-white placeholder:text-white/40 focus:border-accent/60 focus:outline-none disabled:opacity-60 max-md:min-h-[6.5rem]"
+            className="w-full max-h-36 min-h-[2.75rem] flex-1 resize-none overflow-y-auto rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm leading-normal text-white placeholder:text-white/40 focus:border-accent/60 focus:outline-none disabled:opacity-60 md:min-h-[5.75rem] md:px-3.5 md:py-3 md:text-[15px]"
           />
 
           {micError && (
@@ -370,7 +371,7 @@ const PortfolioChatPanel = () => {
               title={recording ? strings.stopTitle : strings.micTitle}
               aria-label={recording ? strings.stopTitle : strings.micTitle}
               aria-pressed={recording}
-              className={`flex shrink-0 items-center justify-center rounded-xl px-4 py-3 transition-colors ${
+              className={`flex shrink-0 items-center justify-center rounded-xl px-3 py-2 transition-colors md:px-4 md:py-3 ${
                 recording
                   ? "bg-red-500 text-white animate-pulse"
                   : "bg-white/10 text-white/80 hover:bg-white/15"
@@ -385,7 +386,7 @@ const PortfolioChatPanel = () => {
             <button
               type="submit"
               disabled={sending || recording || transcribing || !input.trim()}
-              className="flex-1 shrink-0 rounded-xl bg-accent px-4 py-3 text-[15px] font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex-1 shrink-0 rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40 md:py-3 md:text-[15px]"
             >
               Send
             </button>
