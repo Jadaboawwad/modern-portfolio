@@ -31,7 +31,7 @@ const Home = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="max-w-[280px] sm:max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-4 xl:mb-16 text-sm leading-relaxed xl:text-base xl:leading-[1.8]"
+            className="max-w-[260px] sm:max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-3 xl:mb-16 text-xs leading-relaxed xl:text-base xl:leading-[1.8]"
           >
             Software &amp; Mechatronics Engineer based in Amman, Jordan — building
             full-stack platforms, cross-platform mobile apps, and intelligent
@@ -45,7 +45,7 @@ const Home = () => {
             animate="show"
             exit="hidden"
             transition={{ duration: 1, ease: "easeInOut" }}
-            className="relative z-10 mx-auto mb-4 w-[210px] sm:w-[250px] xl:hidden"
+            className="relative z-10 mx-auto mb-3 w-[140px] sm:w-[170px] xl:hidden"
           >
             <Image
               src="/avatar.png"
