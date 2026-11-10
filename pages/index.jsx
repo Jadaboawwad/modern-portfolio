@@ -12,7 +12,7 @@ const Home = () => {
     <div className="bg-primary/60 h-full">
       {/* text */}
       <div className="relative z-10 w-full h-full bg-gradient-to-r from-primary/10 via-black/30 to-black/10">
-        <div className="text-center flex flex-col justify-start max-xl:pt-2 xl:justify-center xl:pt-40 xl:text-left h-full container mx-auto px-4 pb-28 xl:pb-0">
+        <div className="text-center flex flex-col justify-start max-xl:pt-2 xl:justify-center xl:pt-40 xl:text-left h-full container mx-auto px-4 pb-6 xl:pb-0">
           {/* title */}
           <motion.h1
             variants={fadeIn("down", 0.2)}
@@ -31,7 +31,7 @@ const Home = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-10 xl:mb-16"
+            className="max-w-[280px] sm:max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-4 xl:mb-16 text-sm leading-relaxed xl:text-base xl:leading-[1.8]"
           >
             Software &amp; Mechatronics Engineer based in Amman, Jordan — building
             full-stack platforms, cross-platform mobile apps, and intelligent
@@ -45,7 +45,7 @@ const Home = () => {
             animate="show"
             exit="hidden"
             transition={{ duration: 1, ease: "easeInOut" }}
-            className="relative z-10 mx-auto mb-6 w-[150px] sm:w-[180px] xl:hidden"
+            className="relative z-10 mx-auto mb-4 w-[210px] sm:w-[250px] xl:hidden"
           >
             <Image
               src="/avatar.png"
