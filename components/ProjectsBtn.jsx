@@ -9,7 +9,7 @@ const ProjectsBtn = () => {
       <Link
         href="/work"
         aria-label="My projects"
-        className="relative z-20 touch-manipulation w-[185px] h-[185px] flex justify-center items-center bg-circleStar bg-cover bg-center bg-no-repeat group"
+        className="relative z-20 touch-manipulation w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] xl:w-[185px] xl:h-[185px] flex justify-center items-center bg-circleStar bg-cover bg-center bg-no-repeat group"
       >
         <Image
           src="/rounded-text.png"
@@ -19,7 +19,7 @@ const ProjectsBtn = () => {
           className="animate-spin-slow w-full h-full max-w-[141px] max-h-[148px] pointer-events-none select-none"
         />
         <HiArrowRight
-          className="pointer-events-none absolute text-4xl group-hover:translate-x-2 transition-all duration-300"
+          className="pointer-events-none absolute text-2xl sm:text-3xl xl:text-4xl group-hover:translate-x-2 transition-all duration-300"
           aria-hidden
         />
       </Link>

@@ -45,7 +45,7 @@ const Home = () => {
             animate="show"
             exit="hidden"
             transition={{ duration: 1, ease: "easeInOut" }}
-            className="relative z-10 mx-auto mb-3 w-[140px] sm:w-[170px] xl:hidden"
+            className="relative z-10 mx-auto mb-3 w-[190px] sm:w-[220px] xl:hidden"
           >
             <Image
               src="/avatar.png"
