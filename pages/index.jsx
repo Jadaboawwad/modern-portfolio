@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 import ParticlesContainer from "../components/ParticlesContainer";
 import ProjectsBtn from "../components/ProjectsBtn";
@@ -36,6 +37,25 @@ const Home = () => {
             full-stack platforms, cross-platform mobile apps, and intelligent
             automation systems.
           </motion.p>
+
+          {/* mobile/tablet portrait */}
+          <motion.div
+            variants={fadeIn("up", 0.5)}
+            initial="hidden"
+            animate="show"
+            exit="hidden"
+            transition={{ duration: 1, ease: "easeInOut" }}
+            className="relative z-10 mx-auto mb-6 w-[150px] sm:w-[180px] xl:hidden"
+          >
+            <Image
+              src="/avatar.png"
+              alt="Jehad Abu Awwad"
+              width={737}
+              height={678}
+              priority
+              className="h-auto w-full pointer-events-none select-none"
+            />
+          </motion.div>
 
           {/* btn */}
           <div className="relative z-20 flex justify-center xl:hidden">
